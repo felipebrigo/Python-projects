@@ -1,6 +1,9 @@
 from time import sleep
 from random import randint
 
+escolha = 0
+escolhacomputador=0
+
 def startgame():
     print("---------- PEDRA / PAPEL / TESOURA ----------")
     print("Para jogar PEDRA digite 1")
@@ -8,11 +11,17 @@ def startgame():
     print("Para jogar TESOURA digite 3")
 
 def choicetext():
+    global escolha    
     print("Vamos Jogar?")
-    escolha = int(input(print("Digite sua opção:")))
-    while escolha < 1 or escolha > 3:
+    escolha = int(input("Digite sua opção:"))
+    print(type(escolha))
+    while type(escolha) != int:
+        print("Caractere Inválido!")
+        escolha = int(input("Digite sua opção - 1 / 2 / 3:"))
+    
+    while not escolha in range(1,4):
         print("Número Inválido!")
-        escolha=int(input(print("Digite sua opção:")))
+        escolha = int(input("Digite sua opção:"))
 
     sleep(1.0)
     print("PEDRA...")
@@ -23,6 +32,7 @@ def choicetext():
     return escolha
 
 def computerchoice():
+    global escolhacomputador
     escolhacomputador=randint(1,3)
     return escolhacomputador
 
@@ -63,12 +73,12 @@ while jogar=="S" or jogar=="s":
     choicetext()
     computerchoice()
     ganhador=quemganhou(escolha, escolhacomputador)
-    escolha=item(escolha)
-    escolhacomputador = item(escolhacomputador)
+    escolhatexto=item(escolha)
+    escolhacomputadortexto = item(escolhacomputador)
 
 
-    print("Você jogou ", escolha, " e eu joguei ", escolhacomputador)
+    print("Você jogou ", escolhatexto, " e eu joguei ", escolhacomputadortexto)
 
     print("... portanto ", ganhador, "ganhou!")
-    jogar=input(print("Jogar de novo? S/N: "))
+    jogar=input("Jogar de novo? S/N: ")
 print("Jogo terminado! Obrigado")
