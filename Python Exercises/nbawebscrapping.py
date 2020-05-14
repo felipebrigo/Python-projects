@@ -12,9 +12,10 @@ option = Options()
 option.headless = True
 driver = webdriver.Chrome()
 driver.get(url)
-
 time.sleep(10)
+
 driver.find_element_by_xpath("")
+//div[@class = "nba-stat-table"]//table/thead//tr//th[@data-field="PTS"]
 
 
 
