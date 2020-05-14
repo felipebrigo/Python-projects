@@ -12,7 +12,10 @@ option = Options()
 option.headless = True
 driver = webdriver.Chrome()
 driver.get(url)
-driver.quit()
+
+time.sleep(10)
+driver.find_element_by_xpath("")
+
 
 
 # 1 - Catch HTML content through URL
@@ -27,3 +30,5 @@ driver.quit()
 # pip install lxml
 # pip install beautifulsoup4
 # pip install selenium
+
+driver.quit()
