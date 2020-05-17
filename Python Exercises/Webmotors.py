@@ -7,7 +7,7 @@ import requests
 import json
 
 # 1 - Catch HTML content through URL
-url = "https://www.webmotors.com.br/carros-usados/estoque?inst=header:webmotors:header-deslogado::carros-usados-ou-seminovos"
+url = "https://www.webmotors.com.br/carros-usados/sp?estadocidade=S%C3%A3o%20Paulo&tipoveiculo=carros-usados"
 
 option = Options()
 option.headless = True
