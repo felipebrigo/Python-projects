@@ -19,13 +19,20 @@ time.sleep(5)
 element = driver.find_element_by_xpath("//div[@class='Search-result Search-result--container-right']")
 html_content=element.get_attribute('outerHTML')
 
-#print(html_content)
-
 # 2 - Parsing HTML
 soup=BeautifulSoup(html_content,'html.parser')
-print(soup.get_text())
+#print(soup.get_text())
+for marca in soup.find_all('h2'):
+    print(marca.get_text())
+for modelo in soup.find_all('h3'):
+    print(modelo.get_text())
+for valor in soup.find_all('strong class'):
+    print(valor.get_text())
+for ano in soup.find_all('span class'):
+    print(ano.get_text())
 for link in soup.find_all('a'):
     print(link.get('href'))
 # 3 - Structure data through Dataframe Pandas
+
 # 4 - Change data to Dictionary
 driver.quit()
