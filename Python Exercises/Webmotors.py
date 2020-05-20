@@ -35,13 +35,14 @@ for marca in soup.find_all('h2'):
     print(marca.get_text())
 for modelo in soup.find_all('h3'):
     print(modelo.get_text())
-for valor in soup.find_all(has_class_strong_defined):
-    print(valor.get_text())
-for ano in soup.find_all(has_class_span_defined):
-    print(ano.get_text())    
+for valor in soup.find_all(re.compile('^strong')):
+    if valor.text != " Santander":
+        print(valor.get_text())
+for ano in soup.find_all(re.compile('^span')):
+    if ano.text:
+        print(ano.get_text())    
 for link in soup.find_all('a'):
     print(link.get('href'))
-
     
 # 3 - Structure data through Dataframe Pandas
 
