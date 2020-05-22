@@ -6,7 +6,6 @@ from selenium import webdriver
 from selenium.webdriver.firefox.options import Options
 from selenium.webdriver.chrome.options import Options
 import requests
-import json
 import re
 import numpy as np
 
@@ -24,24 +23,10 @@ element = driver.find_element_by_xpath("//div[@class='Search-result Search-resul
 html_content=element.get_attribute('outerHTML')
 
 # 2 - Parsing HTML
-soup=BeautifulSoup(html_content,'html.parser')
+#soup=BeautifulSoup(html_content,'html.parser')
 only_a_tags=SoupStrainer("a")
 soup1=BeautifulSoup(html_content,'html.parser',parse_only=only_a_tags)
-"""
-print(soup.prettify())
-for marca in soup.find_all('h2'):
-    print(marca.get_text())
-for modelo in soup.find_all('h3'):
-    print(modelo.get_text())
-for valor in soup.find_all(re.compile('^strong')):
-    if valor.text != " Santander":
-        print(valor.get_text())
-for ano in soup.find_all(re.compile('^span')):
-    if ano.text:
-        print(ano.get_text())    
-for link in soup.find_all('a'):
-    print(link.get('href'))
-"""    
+ 
 print(soup1.prettify())
 
 marcas=[]
@@ -67,18 +52,19 @@ for ano in soup1.find_all(re.compile('^span')):
             if ano.text != "Carros":
                 if ano.text != "Sp":
                     anos.append(ano.get_text())
-                    #print(ano.get_text())
-print(anos)
-"""df["ano","km","cidade-UF"] = ano
-for link in soup1.find_all('a', not 'CardVehicle__linkPhoto'):
+                    
+"""for link in soup.find_all('a'):
     print(link.get('href'))
 """
 
 # 3 - Structure data through Dataframe Pandas
-lista = pd.DataFrame(np.array(anos).reshape(3,int(len(anos)/3)), columns=['Ano','kms','Cidade'])
-print(lista)
+lista = pd.DataFrame(np.array(anos).reshape(-1,3))
+lista.columns=['Ano','kms','Cidade']
 df = pd.DataFrame({'Marca': marcas, 'Modelo': modelos, 'Valor': valores})
-print(df)
 
-# 4 - Change data to Dictionary
+result=pd.concat([df,lista],axis=1)
+print(result)
+
+# 4 - Export DataTable to Excel or CSV
+
 driver.quit()
