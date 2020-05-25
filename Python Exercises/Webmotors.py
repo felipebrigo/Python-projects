@@ -1,4 +1,6 @@
 import time 
+import threading
+import string
 import pandas as pd
 from bs4 import BeautifulSoup
 from bs4 import SoupStrainer
@@ -16,9 +18,11 @@ option = Options()
 option.headless = True
 driver = webdriver.Firefox()
 driver.get(url)
-time.sleep(2)
-driver.execute_script('window.scrollTo(0, document.body.scrollHeight);')
-time.sleep(2)
+seconds=10
+while seconds != 0:
+    driver.execute_script('window.scrollTo(0, document.body.scrollHeight);')
+    time.sleep(1)
+    seconds=seconds-1
 element = driver.find_element_by_xpath("//div[@class='Search-result Search-result--container-right']")
 html_content=element.get_attribute('outerHTML')
 
@@ -52,15 +56,21 @@ for ano in soup1.find_all(re.compile('^span')):
             if ano.text != "Carros":
                 if ano.text != "Sp":
                     anos.append(ano.get_text())
-                    
-"""for link in soup.find_all('a'):
-    print(link.get('href'))
-"""
+carrolink=[]
+carrolink1=[]    
+for link in soup1.find_all('a'):
+    comparator=link.get('href')
+    word='comprar'
+    if comparator.find(word) != -1:
+        if comparator != carrolink1:
+            carrolink1=comparator
+            carrolink.append(carrolink1)
+            print(link.get('href'))
 
 # 3 - Structure data through Dataframe Pandas
 lista = pd.DataFrame(np.array(anos).reshape(-1,3))
 lista.columns=['Ano','kms','Cidade']
-df = pd.DataFrame({'Marca': marcas, 'Modelo': modelos, 'Valor': valores})
+df = pd.DataFrame({'Marca': marcas, 'Modelo': modelos, 'Valor': valores, 'Link': carrolink})
 
 result=pd.concat([df,lista],axis=1)
 print(result)
@@ -68,3 +78,5 @@ print(result)
 # 4 - Export DataTable to Excel or CSV
 
 driver.quit()
+
+result.to_csv(r'/Users/mac/Desktop/Dataframe.csv')
