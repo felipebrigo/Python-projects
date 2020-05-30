@@ -25,17 +25,41 @@ driver.get(url)
 time.sleep(2)
 element=driver.find_element_by_xpath("//div[@class ='fipe-table-page']")
 html_content=element.get_attribute('outerHTML')
-print(BeautifulSoup(html_content,'html.parser').prettify())
 
-select = Select(driver.find_element_by_class_name("target"))
-select.select_by_visible_text("Vender")
-time.sleep(3)
+soup=BeautifulSoup(html_content,'html.parser')
+print(soup.prettify())
 
-only_option_tags=SoupStrainer("option")
-soup1=BeautifulSoup(html_content,'html.parser',parse_only=only_option_tags)
+print(("-"*15))
+
+only_select_tags=SoupStrainer("select")
+soup1=BeautifulSoup(html_content,'html.parser',parse_only=only_select_tags)
 print(soup1.prettify())
 
-"""vender=WebDriverWait(driver, 5).until(EC.element_to_be_clickable((By.XPATH, "//div[(@id ='ads-interesse')]")))
+print(("-"*15))
+
+for a in soup1.find_all("select", "target"):
+    print(a.get_text())
+
+elementclickable = driver.find_element_by_xpath("//select[@class='target']")
+all_options = elementclickable.find_elements_by_tag_name("option")
+for option in all_options:
+    print("Value is: %s" % option.get_attribute("value"))
+
+#Não deu certto o codigo daqui para frente. Tentar com Action Chains e se não der, tentar com um click na posição do objeto na página
+vender=WebDriverWait(driver, 5).until(EC.presence_of_element_located((By.XPATH, "//select[@class='target']")))
+select=Select(vender)
+# As duas linhas acima passaram no compilador mas não selecionaram e nem abriram o dropdown box.
+print(select)
+select.select_by_visible_text("Vender")
+#vender.click()
+time.sleep(2)
+
+"""select=Select(driver.find_element_by_css_selector('select.target').click())
+select.select_by_visible_text("Comprar").click()
+time.sleep(3)
+
+
+vender=WebDriverWait(driver, 5).until(EC.element_to_be_clickable((By.XPATH, "//div[(@id ='ads-interesse')]")))
 vender.click()
 time.sleep(2)
 #select = Select(brandelements)
@@ -58,4 +82,4 @@ df=df.drop(0)
 qtdyvehicles=df.shape[0]
 print(df)
 print(qtdyvehicles)"""
-driver.quit()
+#driver.quit()
