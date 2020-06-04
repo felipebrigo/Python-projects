@@ -14,11 +14,15 @@ def startgame():
     print(emoji.emojize("To play SCISSOR please press 3 - :scissors:", use_aliases=True))
 
 def choiceanalysis():
-    checkcoice = input("Please enter your choice number - 1 / 2 / 3: ")
-    while (type(checkcoice) != int):
-        print("Please re-type your choice. Only will be accepted numbers 1 for ROCK / 2 for PAPER or 3 for SCISSOR:")
-    while checkchoice != 1 or checkchoice != 2 or checkchoice != 3:
-        print("Please re-type your choice. Only will be accepted numbers 1 for ROCK / 2 for PAPER or 3 for SCISSOR :")
+    checkchoice = -1
+    while checkcoice == -1:
+        checkcoice = input("Please enter your choice number - 1 / 2 / 3: ")
+        if (type(checkcoice) != int):
+            print("Please re-type your choice. Only will be accepted numbers 1 for ROCK / 2 for PAPER or 3 for SCISSOR:")
+            checkcoice = -1
+        if checkchoice != 1 or checkchoice != 2 or checkchoice != 3:
+            print("Please re-type your choice. Only will be accepted numbers 1 for ROCK / 2 for PAPER or 3 for SCISSOR :")
+            checkcoice=-1
     return checkchoice
         
 def choicetext():
