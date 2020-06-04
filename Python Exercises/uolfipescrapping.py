@@ -14,6 +14,7 @@ from selenium.webdriver.support import expected_conditions as EC
 
 import requests
 import numpy as np
+from selenium.webdriver.common.action_chains import ActionChains
 
 # 1 - Catch HTML content through URL
 url = "https://www.uol.com.br/carros/tabela-fipe"
@@ -45,14 +46,26 @@ all_options = elementclickable.find_elements_by_tag_name("option")
 for option in all_options:
     print("Value is: %s" % option.get_attribute("value"))
 
-#Não deu certto o codigo daqui para frente. Tentar com Action Chains e se não der, tentar com um click na posição do objeto na página
-vender=WebDriverWait(driver, 5).until(EC.presence_of_element_located((By.XPATH, "//select[@class='target']")))
-select=Select(vender)
-# As duas linhas acima passaram no compilador mas não selecionaram e nem abriram o dropdown box.
-print(select)
-select.select_by_visible_text("Vender")
-#vender.click()
+menu=driver.find_element_by_xpath('//*[@id="ads-interesse"]')
+actions=ActionChains(driver)
+position=menu.location_once_scrolled_into_view
+print(position)
+time.sleep(1)
+actions.move_by_offset(position)
+time.sleep(1)
+actions.perform()
+actions.move_to_element(menu).click()
+time.sleep(1)
+actions.perform()
 time.sleep(2)
+
+#Não deu certo o codigo daqui para frente. Tentar com Action Chains e se não der, tentar com um click na posição do objeto na página
+#vender=WebDriverWait(driver, 5).until(EC.presence_of_element_located((By.XPATH, "//select[@class='target']")))
+#select=Select(vender)
+# As duas linhas acima passaram no compilador mas não selecionaram e nem abriram o dropdown box.
+#print(select)
+#select.select_by_visible_text("Vender")
+#vender.click()
 
 """select=Select(driver.find_element_by_css_selector('select.target').click())
 select.select_by_visible_text("Comprar").click()

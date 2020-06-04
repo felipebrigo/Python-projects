@@ -1,19 +1,23 @@
 from time import sleep
 from random import randint
+import emoji
 
 escolha = 0
 escolhacomputador=0
 
 def startgame():
     print("---------- PEDRA / PAPEL / TESOURA ----------")
-    print("Para jogar PEDRA digite 1")
-    print("Para jogar PAPEL digite 2")
-    print("Para jogar TESOURA digite 3")
+    print(emoji.emojize("Para jogar PEDRA digite 1 - :punch:", use_aliases=True))
+    print(emoji.emojize("Para jogar PAPEL digite 2 - :raised_hand:", use_aliases=True))
+    print(emoji.emojize("Para jogar TESOURA digite 3 - :scissors:", use_aliases=True))
 
 def choicetext():
     global escolha    
     print("Vamos Jogar?")
-    escolha = int(input("Digite sua opção:"))
+    escolha = input("Digite sua opção:")
+    if (escolha != 1) or (escolha != 2) or (escolha != 3):
+        print("Por favor, digite um número válido - 1 / 2 / 3:")
+                
     print(type(escolha))
     while type(escolha) != int:
         print("Caractere Inválido!")

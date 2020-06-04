@@ -37,7 +37,7 @@ value=[]
 brand=[]
 only_option_tags=SoupStrainer("option")
 soup1=BeautifulSoup(html_content,'html.parser',parse_only=only_option_tags)
-#print(soup1.prettify())
+print(soup1.prettify())
 
 #Parse and append all data into a Dataframe
 for marcas in soup1.find_all("option"):
@@ -51,18 +51,19 @@ print(qtdyvehicles)
 
 #Iterate with first combobox selected - to fix code from this point - Difficulty to iterate to dropdown box
 brandelements = driver.find_element_by_xpath(
-    "//select[(@id = 'selectMarcacarro')]")
+    '//select[(@id = "selectMarcacarro")]')
+branditem = driver.find_element_by_xpath('//option[(@value = "2")]')
 html_new_content=brandelements.get_attribute('outerHTML')
 print(html_new_content)
-select = Select(brandelements)
-select.select_by_visible_text('Troller')
-brandelements.location_once_scrolled_into_view
+position=brandelements.location_once_scrolled_into_view
+print(position)
+actions=action_chains.ActionChains(driver)
+actions.move_to_element(brandelements).click(branditem)
+time.sleep(1)
+actions.perform()
+time.sleep(1)
 
 newelement=WebDriverWait(driver, 10).until(EC.element_to_be_clickable((By.ID,"selectMarcacarro")))
-newelement.click()
-time.sleep(2)
-action_chains.ActionChains(driver).move_to_element(brandelements).click().perform()
-brandelements[0].click()
 
 #select.select_by_value("57")
 #select.click()
