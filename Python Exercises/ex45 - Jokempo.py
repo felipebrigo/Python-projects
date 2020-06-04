@@ -11,7 +11,7 @@ def startgame():
     print("---------- ROCK / PAPER / SCISSORS ----------")
     print(emoji.emojize("To play ROCK please press 1 - :punch:", use_aliases=True))
     print(emoji.emojize("To play PAPER please press 2 - :raised_hand:", use_aliases=True))
-    print(emoji.emojize("To play SCISSOR please press 3 - :scissors:", use_aliases=True))
+    print(emoji.emojize("To play SCISSOR please press 3 - :scissors: /n", use_aliases=True))
 
 def choiceanalysis():
     
@@ -23,9 +23,9 @@ def choiceanalysis():
         
 def choicetext():
     global userchoice    
-    print("Let's play?")
+    print("Let's play? /n")
     choiceanalysis()
-    userchoice= check_choice
+    userchoice = check_choice
     sleep(1.0)
     print(emoji.emojize("ROCK... :punch:", use_aliases=True))
     sleep(1.0)
@@ -45,48 +45,57 @@ def item(chosen):
     elif chosen == 2:
         selecteditem="PAPER"
     else:
-        selectitem="TESOURA"
-    return selectitem
+        selecteditem="SCISSOR"
+    return selecteditem
 
-def quemganhou(minhaescolha, computador):
-        if minhaescolha == 1 and computador == 1:
-            ganhador="EMPATE"
-        elif minhaescolha == 1 and computador == 2:
-            ganhador="COMPUTADOR"
-        elif minhaescolha == 1 and computador == 3:
-            ganhador="VOCÊ"
-        elif minhaescolha == 2 and computador == 1:
-            ganhador="VOCÊ"
-        elif minhaescolha == 2 and computador == 2:
-            ganhador="EMPATE"
-        elif minhaescolha == 2 and computador == 3:
-            ganhador="COMPUTADOR"
-        elif minhaescolha == 3 and computador == 1:
-            ganhador="COMPUTADOR"
-        elif minhaescolha == 3 and computador == 2:
-            ganhador="VOCÊ"
-        elif minhaescolha == 3 and computador == 3:
-            ganhador="EMPATE"
-        return ganhador
+def whowon(userchoice, computerchoice):
+        if userchoice == 1 and computerchoice == 1:
+            won="DRAW"
+        elif userchoice == 1 and computerchoice == 2:
+            won="COMPUTER"
+        elif userchoice == 1 and computerchoice == 3:
+            won="YOU"
+        elif userchoice == 2 and computerchoice == 1:
+            won="YOU"
+        elif userchoice == 2 and computerchoice == 2:
+            won="DRAW"
+        elif userchoice == 2 and computerchoice == 3:
+            won="COMPUTER"
+        elif userchoice == 3 and computerchoice == 1:
+            won="COMPUTER"
+        elif userchoice == 3 and computerchoice == 2:
+            won="YOU"
+        elif userchoice == 3 and computerchoice == 3:
+            won="DRAW"
+        return won
 
-jogar="S"
+def points(won):
+    if won == "YOU":
+        userscore = userscore+1
+    if won == "COMPUTER":
+        computerscore = computerscore+1
+    return userscore, computerscore
 
-while play=="S" or play=="s":
+play="Y"
+
+while play=="Y" or play=="y":
     startgame()
     choicetext()
-    computerchoice()
-    ganhador=quemganhou(escolha, escolhacomputador)
-    escolhatexto=item(escolha)
-    escolhacomputadortexto = item(escolhacomputador)
+    computerrandomchoice()
+    won=whowon(userchoice, computerchoice)
+    if won != "DRAW":
+        points(won)
+    usertext=item(userchoice)
+    computertext = item(computerchoice)
 
 
-    print("Você jogou ", escolhatexto, " e eu joguei ", escolhacomputadortexto)
+    print("You played ", usertext, " and computer played ", computertext)
 
-    print("... portanto ", ganhador, "ganhou!")
+    print("... so  ", won, " won!")
     
     print("------- SCORES -------")
-    userscore
-    computerscore
+    print("USER POINTS: ", userscore)
+    print("COMPUTER POINTS: ", computerscore)
     
-    jogar=input("Jogar de novo? S/N: ")
-print("Jogo terminado! Obrigado")
+    jogar=input("Play again? Y/N: ")
+print("End of the game! See you soon...")
