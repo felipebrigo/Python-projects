@@ -2,49 +2,46 @@ from time import sleep
 from random import randint
 import emoji
 
-escolha = 0
-escolhacomputador=0
+userchoice = 0
+computerchoice=0
 
 def startgame():
-    print("---------- PEDRA / PAPEL / TESOURA ----------")
-    print(emoji.emojize("Para jogar PEDRA digite 1 - :punch:", use_aliases=True))
-    print(emoji.emojize("Para jogar PAPEL digite 2 - :raised_hand:", use_aliases=True))
-    print(emoji.emojize("Para jogar TESOURA digite 3 - :scissors:", use_aliases=True))
+    print("---------- ROCK / PAPER / SCISSORS ----------")
+    print(emoji.emojize("To play ROCK please press 1 - :punch:", use_aliases=True))
+    print(emoji.emojize("To play PAPER please press 2 - :raised_hand:", use_aliases=True))
+    print(emoji.emojize("To play SCISSOR please press 3 - :scissors:", use_aliases=True))
 
-def choicetext():
-    global escolha    
-    print("Vamos Jogar?")
-    escolha = input("Digite sua opção:")
-    if (escolha != 1) or (escolha != 2) or (escolha != 3):
-        print("Por favor, digite um número válido - 1 / 2 / 3:")
-                
-    print(type(escolha))
-    while type(escolha) != int:
-        print("Caractere Inválido!")
-        escolha = int(input("Digite sua opção - 1 / 2 / 3:"))
+def choiceanalysis():
     
-    while not escolha in range(1,4):
-        print("Número Inválido!")
-        escolha = int(input("Digite sua opção:"))
-
+    while (type(check_coice = input("Please enter your choice number - 1 / 2 / 3: ")) != int):
+        print("Please re-type your choice. Only will be accepted numbers 1 for ROCK / 2 for PAPER or 3 for SCISSOR:")
+    while (check_choice != 1) or (check_choice != 2) or (check_choice != 3):
+        print("Please re-type your choice. Only will be accepted numbers 1 for ROCK / 2 for PAPER or 3 for SCISSOR :")
+    return check_choice
+        
+def choicetext():
+    global userchoice    
+    print("Let's play?")
+    choiceanalysis()
+    userchoice= check_choice
     sleep(1.0)
-    print("PEDRA...")
+    print(emoji.emojize("ROCK... :punch:", use_aliases=True))
     sleep(1.0)
-    print("PAPEL...")
+    print(emoji.emojize("PAPER... :raised_hand:", use_aliases=True))
     sleep(1.0)
-    print("TESOURA...")
-    return escolha
+    print(emoji.emojize("SCISSOR... :scissors:", use_aliases=True))
+    return userchoice
 
-def computerchoice():
-    global escolhacomputador
-    escolhacomputador=randint(1,3)
-    return escolhacomputador
+def computerrandomchoice():
+    global computerchoice
+    computerchoice=randint(1,3)
+    return computerchoice
 
-def item(escolhido):
-    if escolhido == 1:
-        selectitem="PEDRA"
-    elif escolhido == 2:
-        selectitem="PAPEL"
+def item(chosen):
+    if chosen == 1:
+        selecteditem="ROCK"
+    elif chosen == 2:
+        selecteditem="PAPER"
     else:
         selectitem="TESOURA"
     return selectitem
@@ -72,7 +69,7 @@ def quemganhou(minhaescolha, computador):
 
 jogar="S"
 
-while jogar=="S" or jogar=="s":
+while play=="S" or play=="s":
     startgame()
     choicetext()
     computerchoice()
