@@ -4,6 +4,8 @@ import emoji
 
 userchoice = 0
 computerchoice=0
+userscore=0
+computerscore=0
 
 def startgame():
     print("---------- ROCK / PAPER / SCISSORS ----------")
@@ -81,5 +83,10 @@ while play=="S" or play=="s":
     print("Você jogou ", escolhatexto, " e eu joguei ", escolhacomputadortexto)
 
     print("... portanto ", ganhador, "ganhou!")
+    
+    print("------- SCORES -------")
+    userscore
+    computerscore
+    
     jogar=input("Jogar de novo? S/N: ")
 print("Jogo terminado! Obrigado")
