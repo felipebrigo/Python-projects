@@ -14,16 +14,11 @@ def startgame():
     print(emoji.emojize("To play SCISSOR please press 3 - :scissors:", use_aliases=True))
 
 def choiceanalysis():
-    checkchoice = -1
-    while checkcoice == -1:
-        checkcoice = input("Please enter your choice number - 1 / 2 / 3: ")
-        if (type(checkcoice) != int):
-            print("Please re-type your choice. Only will be accepted numbers 1 for ROCK / 2 for PAPER or 3 for SCISSOR:")
-            checkcoice = -1
-        if checkchoice != 1 or checkchoice != 2 or checkchoice != 3:
-            print("Please re-type your choice. Only will be accepted numbers 1 for ROCK / 2 for PAPER or 3 for SCISSOR :")
-            checkcoice=-1
-    return checkchoice
+    checkchoice = str(input("Please enter your choice number 1 / 2 / 3: "))
+    while (checkchoice != "1" and checkchoice != "2" and checkchoice != "3"):
+        print("Please re-type your choice. Only will be accepted numbers 1 for ROCK / 2 for PAPER or 3 for SCISSOR!")
+        checkchoice = str(input("Please enter your choice number 1 / 2 / 3: "))
+    return int(checkchoice)
         
 def choicetext():
     global userchoice    
@@ -74,10 +69,12 @@ def whowon(userchoice, computerchoice):
         return won
 
 def points(won):
+    global userscore
+    global computerscore
     if won == "YOU":
-        userscore = userscore+1
+        userscore += 1
     if won == "COMPUTER":
-        computerscore = computerscore+1
+        computerscore += 1
     return userscore, computerscore
 
 play="Y"
@@ -94,12 +91,14 @@ while play=="Y" or play=="y":
 
 
     print("You played ", usertext, " and computer played ", computertext)
-
-    print("... so  ", won, " won!")
     
+    if won == "DRAW":
+        print("... so it was a DRAW game!")
+    print("... so  ", won, " won!")
+    print("")
     print("------- SCORES -------")
     print("USER POINTS: ", userscore)
     print("COMPUTER POINTS: ", computerscore)
     
-    jogar=input("Play again? Y/N: ")
+    play=input("Play again? Y/N: ")
 print("End of the game! See you soon...")
