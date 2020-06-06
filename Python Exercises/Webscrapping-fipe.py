@@ -8,6 +8,7 @@ from selenium import webdriver
 from selenium.webdriver.firefox.options import Options
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.support.ui import Select
+from selenium.webdriver.support.select import Select
 
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.common.by import By
@@ -50,9 +51,14 @@ print(df)
 print(qtdyvehicles)
 
 #Iterate with first combobox selected - to fix code from this point - Difficulty to iterate to dropdown box
+
 brandelements = driver.find_element_by_xpath(
     '//select[(@id = "selectMarcacarro")]')
-branditem = driver.find_element_by_xpath('//option[(@value = "2")]')
+driver.execute_script('arguments[0].scrollIntoView(true);',brandelements)
+Select(brandelements).select_by_index(3)
+
+
+"""
 html_new_content=brandelements.get_attribute('outerHTML')
 print(html_new_content)
 position=brandelements.location_once_scrolled_into_view
@@ -74,14 +80,22 @@ for option in all_options:
     select = Select(brandelements).select_by_value("127")
     print(select)
     time.sleep(1)
-    
+"""
+
+time.sleep(3)  
+driver.find_element_by_xpath(
+    '//select[(@id = "selectAnoModelocarro")]').click()
+time.sleep(2)  
 yearelement = driver.find_element_by_xpath(
-    "//*[(@id = 'selectAnoModelocarro')]")
-html_year_element_content=yearelement.get_attribute('outerHTML')
+    '//select[(@id = "selectAnoModelocarro")]')
+Select(yearelement).select_by_index(3)
+time.sleep(3) 
+
+"""html_year_element_content=yearelement.get_attribute('outerHTML')
 #print(html_year_element_content)
 time.sleep(1)
 
-"""element = driver.find_element_by_xpath(
+element = driver.find_element_by_xpath(
     "//*[(@id = 'selectMarcacarro')]")
 html_content=element.get_attribute('outerHTML')
 print(html_content)
@@ -92,4 +106,4 @@ select.select_by_visible_text('Troller')
 """
 
 
-driver.quit()
+#driver.quit()
