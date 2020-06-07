@@ -26,6 +26,7 @@ url = "https://veiculos.fipe.org.br/#carro"
 option = Options()
 option.headless = True
 driver = webdriver.Firefox()
+driver.implicitly_wait(10)
 driver.get(url)
 driver.execute_script('window.scrollTo(0, document.body.scrollHeight);')
 time.sleep(2)
