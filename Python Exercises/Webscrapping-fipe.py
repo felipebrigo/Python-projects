@@ -9,6 +9,7 @@ from selenium.webdriver.firefox.options import Options
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.support.ui import Select
 from selenium.webdriver.support.select import Select
+from selenium.webdriver.support.wait import WebDriverWait
 
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.common.by import By
@@ -55,7 +56,7 @@ print(qtdyvehicles)
 
 brandelements = driver.find_element_by_xpath(
     '//select[(@id = "selectMarcacarro")]')
-driver.execute_script('arguments[0].scrollIntoView(true);',brandelements)
+#driver.execute_script('arguments[0].scrollIntoView(true);',brandelements)
 Select(brandelements).select_by_index(3)
 
 
