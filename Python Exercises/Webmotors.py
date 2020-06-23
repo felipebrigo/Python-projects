@@ -18,7 +18,7 @@ option = Options()
 option.headless = True
 driver = webdriver.Firefox()
 driver.get(url)
-seconds=150
+seconds=60
 while seconds != 0:
     driver.execute_script('window.scrollTo(0, document.body.scrollHeight);')
     time.sleep(1)
