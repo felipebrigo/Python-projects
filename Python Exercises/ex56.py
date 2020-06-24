@@ -20,7 +20,7 @@ def answer():
     matrizidade=matriz[ : ,0]
     matrizidadeajustada=list(map(int,matrizidade))
     print(matrizidade)
-    print("A média de idade do Grupo é: {}".format(avr))
+    print("A média de idade do Grupo é: {}")
 
 printresult() 
 answer()
