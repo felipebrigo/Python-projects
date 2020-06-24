@@ -16,15 +16,11 @@ def inputpessoa():
     return dados
 
 def answer():
-    matriz=np.array([dados])
-    print (matriz)
-    print(matriz.shape)
-    print(matriz.size)
-    print(matriz.dtype.name)
-    matrizidade=matriz[ : ,0].copy()
+    matriz=np.array(dados)
+    matrizidade=matriz[ : ,0]
+    matrizidadeajustada=list(map(int,matrizidade))
     print(matrizidade)
-    #avr=matriz.mean(axis=0)
-    #print("A média de idade do Grupo é: {}".format(avr))
+    print("A média de idade do Grupo é: {}".format(avr))
 
 printresult() 
 answer()
