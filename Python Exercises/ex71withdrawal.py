@@ -6,20 +6,20 @@ notesten=0
 notesfiv=0
 notesone=0
 total_amount = int(input("Please type the amount you want to withdraw:"))
-while total_amount != 1:
-    if total_amount > 100:
+while total_amount != 1 or total_amount!=0:
+    if total_amount >= 100:
         noteshun = total_amount//100
         total_amount = total_amount % 100
-    elif total_amount < 100 and total_amount > 50:
+    elif total_amount < 100 and total_amount >= 50:
         notesfif = total_amount//50
         total_amount = total_amount % 50
-    elif total_amount < 50 and total_amount > 20:
+    elif total_amount < 50 and total_amount >= 20:
         notestwe = total_amount//20
         total_amount = total_amount % 20
-    elif total_amount < 20 and total_amount > 10:
+    elif total_amount < 20 and total_amount >= 10:
         notesten = total_amount//10
         total_amount = total_amount % 10
-    elif total_amount < 10 and total_amount > 5:
+    elif total_amount < 10 and total_amount >= 5:
         notesfiv = total_amount//5
         total_amount = total_amount % 5
     else:
