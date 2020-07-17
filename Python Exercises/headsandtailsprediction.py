@@ -3,6 +3,7 @@
 def headsandtails():
     from random import randint
     flipcoin=randint(0,1)
+    flipcoinlist.append(flipcoin)
     print(flipcoin)
 
 def equilibrium():
@@ -15,8 +16,11 @@ def equilibrium():
 import pandas as pd
 #addressfile=path()
 #historicaldata=pd.read_csv(addressfile)
+flipcoinlist=[]
 answer="Y"
 while answer=="Y" or answer=="y":
     headsandtails()
     answer=str(input("Do you want to continue? (Y/N):"))
+    
+print(flipcoinlist)
 print("Thank you for playing our game")
