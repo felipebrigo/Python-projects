@@ -21,6 +21,6 @@ answer="Y"
 while answer=="Y" or answer=="y":
     headsandtails()
     answer=str(input("Do you want to continue? (Y/N):"))
-    
+        
 print(flipcoinlist)
 print("Thank you for playing our game")
