@@ -10,7 +10,7 @@ def equilibrium():
     """This function suggest probability to bet in heads(0) or tails(1) depending on the historical data. 
     The main driver of this analysis is to maintaining the equivalent 50/50 - Equilibrium - for each side """
     probheads=probtails=0.00
-    print (f'The probability to find heads (0) is {probheads} and tails (1) is {probtails}')
+    print (f'The probability to find heads (0) is {probheads:.2f} and tails (1) is {probtails:.2f}')
 
 
 import pandas as pd
