@@ -1,5 +1,7 @@
 import os
 from PIL import Image
+from datetime import datetime as dt
+
 '''teste='/Users/mac/Downloads'
 os.chdir(teste)
 teste2=teste+'/Python'+'/teste'+'/teste2'
@@ -12,15 +14,17 @@ print(os.listdir('/Users/mac/Downloads'))
 files=os.listdir("/Users/mac/Downloads")
 for file in files:
     file_split=file.split(".")
-    if "jpeg" in file_split:
+    if "JPG" in file_split:
         photo_files.append(file)
 print(photo_files)        
 
-'''im=Image.open('/Users/mac/Downloads/WhatsApp Image 2019-12-11 at 15.41.34.jpeg')
+im=Image.open("/Users/mac/Downloads/" + photo_files[1])
 info=im._getexif()
+print(info)
 if 36867 in info:
     date=info[36867]
-    print(date)
+    date=dt.strptime(date,"%Y:%m:%d")
+    print(date.strftime("%B"))
 else:
-print("Código não encontrado")
-print(info.values[:])'''
+    print("Código não encontrado")
+    print(info.values[:])
