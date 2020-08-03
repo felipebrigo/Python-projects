@@ -11,7 +11,7 @@ import matplotlib.pyplot as plt
 plt.style.use('fivethirtyeight')
 
 #Get the stock quote
-df=web.DataReader('POMO3.SA', data_source='yahoo', start='2012-01-01', end='2020-07-19')
+df=web.DataReader('BRL=X', data_source='yahoo', start='2012-01-01', end='2020-07-19')
 print(df)
 plt.figure(figsize=(16,8))
 plt.title("Close Price History")
