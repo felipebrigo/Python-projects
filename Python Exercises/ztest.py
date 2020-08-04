@@ -23,7 +23,8 @@ info=im._getexif()
 print(info)
 if 36867 in info:
     date=info[36867]
-    date=dt.strptime(date,"%Y:%m:%d")
+    print(date)
+    date=dt.strptime(date,"%Y:%m:%d %H:%M:%S")
     print(date.strftime("%B"))
 else:
     print("Código não encontrado")
