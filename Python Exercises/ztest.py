@@ -13,12 +13,13 @@ extentions=(".jpg", ".jpeg", ".gif", ".tiff")
 print(os.listdir('/Users/mac/Downloads'))
 files=os.listdir("/Users/mac/Downloads")
 for file in files:
-    file_split=file.split(".")
-    if "JPG" in file_split:
-        photo_files.append(file)
+    #file_split=file.split(".")
+    for a in range (0,len(extentions)):
+        if extentions[a] in file.lower():
+            photo_files.append(file)
 print(photo_files)        
 
-im=Image.open("/Users/mac/Downloads/" + photo_files[1])
+im=Image.open("/Users/mac/Downloads/" + photo_files[2])
 info=im._getexif()
 print(info)
 if 36867 in info:
