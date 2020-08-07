@@ -19,7 +19,7 @@ for file in files:
             photo_files.append(file)
 print(photo_files)        
 
-im=Image.open("/Users/mac/Downloads/" + photo_files[2])
+im=Image.open("/Users/mac/Downloads/" + "Petra Metais.jpeg")
 info=im._getexif()
 print(info)
 if 36867 in info:

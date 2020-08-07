@@ -2,12 +2,16 @@
 from PIL import Image
 import os
 import shutil
+import collections
+from datetime import datetime as dt
 
 #Global variables declared or initialized
 general_data={}
 complete_data_list=[]
 photo_files=[]
 folder_list=[]
+year=[]
+month=[]
 extentions=["jpg", "jpeg", "gif", "tiff", "raw"]
 
 #Capture all files in the main path where the program will start to find out pics
@@ -16,7 +20,7 @@ def path(path_start):
     files=os.listdir(path_start)
     for file in files:
         if not "." in file:
-            folder_list=file
+            folder_list.append(file)
         for a in range (0,len(extentions)):
             if extentions[a] in file.lower():
                 photo_files.append(file)
@@ -26,48 +30,70 @@ def path(path_start):
 def data_photo(path_start, photo_files):
     global complete_data_list
     for b in range(0,len(photo_files)):
-        im=Image.open(path_start + photo_files[b])
+        im=Image.open(os.path.join(path_start, photo_files[b]))
         info=im._getexif()
-        if 36867 in info:
-            complete_date=info[36867]
-            date_strip=dt.strptime(date,"%Y:%m:%d %H:%M:%S")
-            month=date_strip.strftime("%B")
-            year=date_strip.strftime("%Y")
-            general_data["Original_Path"]=im
-            general_data["File"]=photo_files[b]
-            general_data["Year"]=year
-            general_data["Month"]=month
-            complete_data_list.append(general_data.copy())
-        else:
-            general_data["Original_Path"]=im
-            general_data["File"]=photo_files[b]
-            general_data["Year"]="No_Data"
-            general_data["Month"]="No_Data"
-            complete_data_list.append(general_data.copy())    
+        try:
             
+            if 36867 in info:
+                complete_date=info[36867]
+                date_strip=dt.strptime(complete_date,"%Y:%m:%d %H:%M:%S")
+                month=date_strip.strftime("%B")
+                year=date_strip.strftime("%Y")
+                general_data["Original_Path"]=im
+                general_data["File"]=photo_files[b]
+                general_data["Year"]=year
+                general_data["Month"]=month
+                complete_data_list.append(general_data.copy())
+            else:
+                general_data["Original_Path"]=im
+                general_data["File"]=photo_files[b]
+                general_data["Year"]="No_Data"
+                general_data["Month"]="No_Data"
+                complete_data_list.append(general_data.copy())
+                
+        except:
+                general_data["Original_Path"]=im
+                general_data["File"]=photo_files[b]
+                general_data["Year"]="No_Data"
+                general_data["Month"]="No_Data"
+                complete_data_list.append(general_data.copy())
+
 #--------------------------------
 
 #Creating specific folders and subfolders
 def create_folder():
     for year_list in complete_data_list:
-        year=general_data["Year"].
-                    
+        #file_directory=os.path.basename(complete_data_list[year_list]["Original_Path"])
+        path_year=complete_data_list['Year']
+        path_month=complete_data_list['Month']
+        complete_data_list['Path_End']=os.path.join(path_start,path_year,path_month)
+        year.append(path_year)
+        month.append(path_month)
+        
+    year=year.keys()
+    print(year)
+    month=month.keys()
+    print(month)
+    for y in year:
+        os.makedirs(y)
+        for m in month:
+            os.makedirs(m)
 
-path_end=os.path.join(path_start,pic_year,pic_month)
-os.makedirs(path_end)
-shutil.move(path_start,path_end)    
-os.path.basename()    
-os.path.join()
-
-#To move pointer inside the path and paste all photo's files
-os.chdir(path_start, pic_year, pic_month)
+#Move files from Original_Path to Path_End        
+def move_file():
+    for moving in complete_data_list:
+        shutil.move(complete_data_list[moving]["Original_Path"], 
+                    complete_data_list[moving]["Path_End"])                    
 
 #Main program
-path_start=os.getcwd()
+path_start='/Users/mac/Downloads'
+#os.getcwd()
 path(path_start)
 data_photo(path_start, photo_files)
+create_folder()
+move_file()
 
-
+print(complete_data_list)
 #Generate a .txt report into workspace with from (path) to (new path) and size of the file
-report={}
-report.update{'filename - from - to - size'}
+#report={}
+#report.update{'filename - from - to - size'}
