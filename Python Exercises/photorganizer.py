@@ -39,52 +39,65 @@ def data_photo(path_start, photo_files):
                 date_strip=dt.strptime(complete_date,"%Y:%m:%d %H:%M:%S")
                 month=date_strip.strftime("%B")
                 year=date_strip.strftime("%Y")
-                general_data["Original_Path"]=im
+                general_data["Original_Path"]=path_start
                 general_data["File"]=photo_files[b]
                 general_data["Year"]=year
                 general_data["Month"]=month
+                general_data["Path_End"]=os.path.join(path_start, year, month)
                 complete_data_list.append(general_data.copy())
             else:
-                general_data["Original_Path"]=im
+                general_data["Original_Path"]=path_start
                 general_data["File"]=photo_files[b]
                 general_data["Year"]="No_Data"
                 general_data["Month"]="No_Data"
+                general_data["Path_End"]=os.path.join(path_start,"No_Data", "No_Data")
                 complete_data_list.append(general_data.copy())
                 
         except:
-                general_data["Original_Path"]=im
+                general_data["Original_Path"]=path_start
                 general_data["File"]=photo_files[b]
                 general_data["Year"]="No_Data"
                 general_data["Month"]="No_Data"
+                general_data["Path_End"]=os.path.join(path_start,"No_Data", "No_Data")
                 complete_data_list.append(general_data.copy())
 
 #--------------------------------
 
 #Creating specific folders and subfolders
 def create_folder():
+    year_list={}
     for year_list in complete_data_list:
-        for y in year_list.values():
+        #for y_list in year_list.values():
             #file_directory=os.path.basename(complete_data_list[year_list]["Original_Path"])
-            path_year=y
-            path_month=complete_data_list['Month']
-            complete_data_list['Path_End']=os.path.join(path_start,path_year,path_month)
+        path_year=year_list["Year"]
+        path_month=year_list["Month"]
+        if not path_year in year:
             year.append(path_year)
+        if not path_month in month:
             month.append(path_month)
-        
-    year=year.keys()
+
+    year.sort()
+    month.sort()    
     print(year)
-    month=month.keys()
     print(month)
-    for y in year:
-        os.makedirs(y)
+    
+    for new_file in complete_data_list:
+        try:
+            os.makedirs(new_file["Path_End"])
+        except:
+            break
+'''        
+    for new_year_list in complete_data_list:
+        for y in year:
+            folder_name=os.path.join(new_year_list["Original_Path"],y)
+            os.makedirs(folder_name)
         for m in month:
-            os.makedirs(m)
+            os.makedirs(m)'''
 
 #Move files from Original_Path to Path_End        
 def move_file():
     for moving in complete_data_list:
-        shutil.move(complete_data_list[moving]["Original_Path"], 
-                    complete_data_list[moving]["Path_End"])                    
+        shutil.move(complete_data_list["Original_Path"], complete_data_list["Path_End"])
 
 #Main program
 path_start='/Users/mac/Downloads'
