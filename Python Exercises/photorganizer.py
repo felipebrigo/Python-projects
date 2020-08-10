@@ -63,12 +63,13 @@ def data_photo(path_start, photo_files):
 #Creating specific folders and subfolders
 def create_folder():
     for year_list in complete_data_list:
-        #file_directory=os.path.basename(complete_data_list[year_list]["Original_Path"])
-        path_year=complete_data_list['Year']
-        path_month=complete_data_list['Month']
-        complete_data_list['Path_End']=os.path.join(path_start,path_year,path_month)
-        year.append(path_year)
-        month.append(path_month)
+        for y in year_list.values():
+            #file_directory=os.path.basename(complete_data_list[year_list]["Original_Path"])
+            path_year=y
+            path_month=complete_data_list['Month']
+            complete_data_list['Path_End']=os.path.join(path_start,path_year,path_month)
+            year.append(path_year)
+            month.append(path_month)
         
     year=year.keys()
     print(year)
