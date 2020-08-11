@@ -65,7 +65,11 @@ def data_photo(path_start, photo_files):
 
 #Creating specific folders and subfolders
 def create_folder():
-    year_list={}
+    for new_file in complete_data_list:
+        try:
+            os.makedirs(new_file["Path_End"])
+            
+'''year_list={}
     for year_list in complete_data_list:
         #for y_list in year_list.values():
             #file_directory=os.path.basename(complete_data_list[year_list]["Original_Path"])
@@ -79,25 +83,20 @@ def create_folder():
     year.sort()
     month.sort()    
     print(year)
-    print(month)
-    
-    for new_file in complete_data_list:
-        try:
-            os.makedirs(new_file["Path_End"])
-        except:
-            break
-'''        
-    for new_year_list in complete_data_list:
-        for y in year:
-            folder_name=os.path.join(new_year_list["Original_Path"],y)
-            os.makedirs(folder_name)
+    print(month)                
+for new_year_list in complete_data_list:
+    for y in year:
+        folder_name=os.path.join(new_year_list["Original_Path"],y)
+        os.makedirs(folder_name)
         for m in month:
             os.makedirs(m)'''
 
-#Move files from Original_Path to Path_End        
+            
+#Moving files from Original_Path to Path_End        
 def move_file():
     for moving in complete_data_list:
-        shutil.move(complete_data_list["Original_Path"], complete_data_list["Path_End"])
+        try:
+            shutil.move(moving["Original_Path"], moving["Path_End"])
 
 #Main program
 path_start='/Users/mac/Downloads'
