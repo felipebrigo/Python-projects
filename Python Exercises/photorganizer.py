@@ -13,6 +13,8 @@ folder_list=[]
 year=[]
 month=[]
 extentions=["jpg", "jpeg", "gif", "tiff", "raw"]
+err=[]
+error_moving=[]
 
 #Capture all files in the main path where the program will start to find out pics
 def path(path_start):
@@ -68,43 +70,26 @@ def create_folder():
     for new_file in complete_data_list:
         try:
             os.makedirs(new_file["Path_End"])
-            
-'''year_list={}
-    for year_list in complete_data_list:
-        #for y_list in year_list.values():
-            #file_directory=os.path.basename(complete_data_list[year_list]["Original_Path"])
-        path_year=year_list["Year"]
-        path_month=year_list["Month"]
-        if not path_year in year:
-            year.append(path_year)
-        if not path_month in month:
-            month.append(path_month)
+        except:
+            err.append(Exception.__class__)            
+    #return err
 
-    year.sort()
-    month.sort()    
-    print(year)
-    print(month)                
-for new_year_list in complete_data_list:
-    for y in year:
-        folder_name=os.path.join(new_year_list["Original_Path"],y)
-        os.makedirs(folder_name)
-        for m in month:
-            os.makedirs(m)'''
-
-            
 #Moving files from Original_Path to Path_End        
-def move_file():
+#def move_files():
     for moving in complete_data_list:
         try:
-            shutil.move(moving["Original_Path"], moving["Path_End"])
+            shutil.move(os.path.join(moving["Original_Path"],moving["File"]), os.path.join(moving["Path_End"],moving["File"]))
+        except:
+            error_moving.append(Exception.__class__)        
+    return err
 
 #Main program
 path_start='/Users/mac/Downloads'
 #os.getcwd()
 path(path_start)
 data_photo(path_start, photo_files)
-create_folder()
-move_file()
+create_error=create_folder()
+print(error_moving)
 
 print(complete_data_list)
 #Generate a .txt report into workspace with from (path) to (new path) and size of the file
