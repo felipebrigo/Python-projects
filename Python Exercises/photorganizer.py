@@ -95,7 +95,7 @@ class photOrganizer:
             complete_data_dict=self.complete_data_list[0]  
         except:
             complete_data_dict={""}
-        with open('photo_organizer.csv', 'w', newline='') as file:
+        with open(os.path.join(self.path_start,'photo_organizer.csv'), 'w', newline='') as file:
             fieldnames=complete_data_dict
             writer = csv.DictWriter(file, fieldnames=fieldnames, restval="")
             writer.writeheader()
@@ -104,8 +104,8 @@ class photOrganizer:
                 
     #Main Program    
     def program(self):
-        self.path_start='/Users/mac/Downloads'
-        #self.path_start=os.getcwd()
+        #self.path_start='/Users/mac/Downloads'
+        self.path_start=os.getcwd()
         self.path(self.path_start)
         self.data_photo(self.path_start, self.photo_files)
         create_error=self.create_folder()
