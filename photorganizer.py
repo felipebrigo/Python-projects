@@ -12,7 +12,7 @@ class photOrganizer:
     #Global variables declared/initialized
     complete_data_list=[]
     photo_files=[]   
-    extentions=["jpg", "jpeg", "gif", "tiff", "bmp", "msp", "pcx", "png", "ppm", "xbm"] 
+    extentions=["jpg", "jpeg", "gif", "tiff", "raw"] 
 
     #Capture all files in the main path where the program will start to find out pics
     def path(self,path_start):
