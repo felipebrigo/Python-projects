@@ -102,9 +102,10 @@ class photOrganizer:
             for data in self.complete_data_list:
                 writer.writerow(data)        
                 
-    #Main Program    
+    #Main Program 
+    #self.path_start='/Users/mac/Downloads'   
     def program(self):
-        #self.path_start='/Users/mac/Downloads'
+        
         self.path_start=os.getcwd()
         self.path(self.path_start)
         self.data_photo(self.path_start, self.photo_files)
