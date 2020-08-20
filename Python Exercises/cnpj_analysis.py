@@ -12,25 +12,25 @@ def slicing():
                     
     with open("/Users/mac/Documents/Lista FCA Leandro/Teste-layout.txt", "r") as r, open("teste.txt", "w") as w:
         r=r.read()
-        textsliced=[r[i:i+1200] for i in range(0, len(r), 1200)]
+        textsliced=[r[i:i+1200] for i in range(0, len(r), 1201)]
         w.writelines(textsliced)
 
 def file_type():
     global textsliced
     for item in range(0,len(textsliced)):
-        if textsliced[item][0]==0:
+        if textsliced[item][0]=='0':
             header_treatment(textsliced[item])
             
-        elif textsliced[item][0]==1:
+        elif textsliced[item][0]=='1':
             data_cnpj(textsliced[item])
             
-        elif textsliced[item][0]==2:
+        elif textsliced[item][0]=='2':
             partner(textsliced[item])
             
-        elif textsliced[item][0]==6:
+        elif textsliced[item][0]=='6':
             secondary(textsliced[item])
             
-        elif textsliced[item][0]==9:
+        elif textsliced[item][0]=='9':
             trailler(textsliced[item])
             
         elif textsliced[item][0]==" ":
