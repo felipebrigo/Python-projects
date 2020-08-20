@@ -1,4 +1,4 @@
-import timeit
+#import timeit
 textsliced=[]
 header_treatment_list=[]
 data_cnpj_list=[]
@@ -19,22 +19,22 @@ def file_type():
     global textsliced
     for item in range(0,len(textsliced)):
         if textsliced[item][0]==0:
-            header_treatment()
-            return textsliced[item]
+            header_treatment(textsliced[item])
+            
         elif textsliced[item][0]==1:
-            data_cnpj()
-            return textsliced[item]
+            data_cnpj(textsliced[item])
+            
         elif textsliced[item][0]==2:
-            partner()
-            return textsliced[item]
+            partner(textsliced[item])
+            
         elif textsliced[item][0]==6:
-            secondary()
-            return textsliced[item]
+            secondary(textsliced[item])
+            
         elif textsliced[item][0]==9:
-            trailler()
-            return textsliced[item]
+            trailler(textsliced[item])
+            
         elif textsliced[item][0]==" ":
-            return data_cnpj(textsliced[item])
+            data_cnpj(textsliced[item])
 
 
 #Header treatment - 1200 characteres
@@ -71,13 +71,8 @@ file_type()
 write_txt_file()
 
     
-print(timeit.timeit(slicing, number=1))
-print(timeit.timeit(file_type, number=1))
-
-
-
-
-
+#print(timeit.timeit(slicing, number=1))
+#print(timeit.timeit(file_type, number=1))
 
 '''Using Buffer on Slicing() is too Slow (0.06865)
 buffersize = 1000000
