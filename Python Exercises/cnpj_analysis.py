@@ -10,10 +10,9 @@ trailler_list=[]
 def slicing():
     global textsliced
                     
-    with open("/Users/mac/Documents/Lista FCA Leandro/Teste-layout.txt", "r") as r, open("teste.txt", "w") as w:
+    with open("/Users/mac/Documents/Lista FCA Leandro/CNPJ empresas/Layout CNPJ e dados do governo/K3241.K03200DV.D00703.L00001.txt", "r",encoding="latin-1") as r:
         r=r.read()
         textsliced=[r[i:i+1200] for i in range(0, len(r), 1201)]
-        w.writelines(textsliced)
 
 def file_type():
     global textsliced
