@@ -19,23 +19,19 @@ def file_type():
     global textsliced
     for item in range(0,len(textsliced)):
         if textsliced[item][0]=='0':
-            header_treatment(textsliced[item])
+            header_treatment(str(item) + " - " + textsliced[item])
             
         elif textsliced[item][0]=='1':
-            data_cnpj(textsliced[item])
+            data_cnpj(str(item) + " - " + textsliced[item])
             
         elif textsliced[item][0]=='2':
-            partner(textsliced[item])
+            partner(str(item) + " - " + textsliced[item])
             
         elif textsliced[item][0]=='6':
-            secondary(textsliced[item])
+            secondary(str(item) + " - " + textsliced[item])
             
         elif textsliced[item][0]=='9':
-            trailler(textsliced[item])
-            
-        elif textsliced[item][0]==" ":
-            data_cnpj(textsliced[item])
-
+            trailler(str(item) + " - " + textsliced[item])
 
 #Header treatment - 1200 characteres
 def header_treatment(text):
@@ -61,9 +57,10 @@ def trailler(text):
 #Import Pandas to re-arrange all list
 #Export to csv file
 def write_txt_file():
-    print(len(data_cnpj_list))
     with open("cnpj.txt","w") as cnpjteste:
         cnpjteste.writelines(data_cnpj_list)
+    with open("partner.txt","w") as partnerlist:
+        partnerlist.writelines(partner_list)
         
 #Main
 slicing()
