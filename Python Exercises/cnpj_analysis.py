@@ -13,6 +13,7 @@ data_cnpj_list=[]
 
 #Slicing the whole datafile in 1200 characters each time
 def slicing():
+    print("Your program has been started!")
     global textsliced
                     
     with open("/Users/mac/Documents/Lista FCA Leandro/CNPJ empresas/Layout CNPJ e dados do governo/K3241.K03200DV.D00703.L00001.txt", "r",encoding="latin-1") as r:
@@ -24,8 +25,8 @@ def file_type():
     state=["PR","SC","RS"]
     for item in range(0,len(textsliced)):
         if textsliced[item][0]=='1':
-            if textsliced[item][224:226]=='02':
-                if textsliced[item][683:685] in state:
+            if textsliced[item][223:225]=='02':
+                if textsliced[item][682:684] in state:
                     data_cnpj(str(item) + " - " + textsliced[item])
         '''    
         elif textsliced[item][0]=='2':
