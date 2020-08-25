@@ -9,7 +9,7 @@ def slicing():
     print("Your program has been started!")
     global textsliced
                     
-    with open("/Users/mac/Documents/Lista FCA Leandro/CNPJ empresas/K3241.K03200DV.D00703.L00003.txt", "r",encoding="latin-1") as r:
+    with open("/Users/mac/Documents/Lista FCA Leandro/CNPJ empresas/K3241.K03200DV.D00703.L00009.txt", "r",encoding="latin-1") as r:
         r=r.read()
         textsliced=[r[i:i+1200] for i in range(0, len(r), 1201)]
 
