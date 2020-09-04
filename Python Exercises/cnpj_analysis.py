@@ -5,13 +5,24 @@ import os
 textsliced=[]
 data_cnpj_list=[]
 data_company_dict={}
+pathfile="/Users/mac/Documents/Lista FCA Leandro/CNPJ empresas/K3241.K03200DV.D00703.L00004.txt"
+endfilenbr=4
 
-#Slicing the whole datafile in 1200 characters each time
+#Slicing the whole datafile in 1200 characters each time and filter only 
+#companies who is active (in operation)
 def slicing():
-    global textsliced               
-    with open("/Users/mac/Documents/Lista FCA Leandro/CNPJ empresas/K3241.K03200DV.D00703.L00010.txt", "r",encoding="latin-1") as r:
+    global textsliced
+    company_active=[]
+    with open(pathfile, "r",encoding="latin-1") as r:
         r=r.read()
         textsliced=[r[i:i+1200] for i in range(0, len(r), 1201)]
+        for item in range(0,len(textsliced)):
+            if textsliced[item][0]=='1':
+                if textsliced[item][223:225]=='02':
+                    company_active.append(textsliced[item])
+        with open(str("/Users/mac/Documents/Lista FCA Leandro/CNPJ empresas/cnpj" + str(endfilenbr) + ".txt"),"w", newline="") as file:
+            for i in range (0,len(company_active)):
+                file.writelines(str(company_active[i])+'\n')
 
 def openfile(programnumber):
     global textsliced
@@ -21,15 +32,13 @@ def openfile(programnumber):
 
 def file_type():
     global textsliced
-    companies=["AUTO","MECANICA","SUSPEN"]
+    companies=["AUTO","MECANICA","SUSPEN","VEICU","BLUEQUEST","PECAS","PNEU", "RECAPA"]
     state=["PR","SC","RS"]
     for item in range(0,len(textsliced)):
-        if textsliced[item][0]=='1':
-            if textsliced[item][223:225]=='02':
-                if textsliced[item][682:684] in state:
-                    for item_companies in range(0,len(companies)):
-                        if companies[item_companies] in textsliced[item][18:223]:
-                            data_cnpj(textsliced[item])
+        if textsliced[item][682:684] in state:
+            for item_companies in range(0,len(companies)):
+                if companies[item_companies] in textsliced[item][18:223]:
+                    data_cnpj(textsliced[item])
 
 #Company treatment - 1200 characters    
 def data_cnpj(text):
@@ -56,43 +65,23 @@ def data_cnpj(text):
 
 #Export to csv file
 def write_txt_file():
-    with open("cnpj.txt","a", newline="") as cnpj:
+    with open("/Users/mac/Documents/Lista FCA Leandro/CNPJ empresas/cnpj-consolidado-filtrado.txt","a", newline="") as cnpj:
         for i in range (0,len(data_cnpj_list)):
             cnpj.writelines(str(data_cnpj_list[i])+'\n')
-        
-def file_size():
-    with open("filesize.txt","w",newline="") as filesizetxt:
-        for itemfilesize in range (0,len(data_cnpj_list)):
-            filesizetxt.writelines(str(itemfilesize) + ' - ' + str(len(data_cnpj_list[itemfilesize]))+'\n')
-        
+     
 #Main
-
 def mainprogram():
     print("Your program has been started!")
-    for programnumber in range(1,11):
-        #slicing()
+    slicing() 
+    '''
+    for programnumber in range(1,(endfilenbr+1)):
         openfile(programnumber)
         file_type()
         write_txt_file()
-        file_size()        
+    '''           
     print("Your program has been concluded successfully!")
         
 start = timer()
 mainprogram()
 end = timer()
 print(end - start)
-
-'''Using Buffer on Slicing() is too Slow (0.06865)
-buffersize = 1000000
-buffer = []
-i=0
-with open("/Users/mac/Documents/Lista FCA Leandro/Teste-layout.txt", "r") as r, open("teste.txt", "w") as w:
-    r=r.read()
-    for text in r:
-        text=r[i:i+1200]
-        i+=1200
-        buffer.append(text)
-        if len(buffer) > buffersize:
-            w.writelines(buffer)
-            buffer = []
-    w.writelines(buffer)'''
