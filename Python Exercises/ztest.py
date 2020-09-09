@@ -19,8 +19,8 @@ def convertfile():
             #df=pd.DataFrame(dictionary)
             #print(df)
         df=pd.DataFrame(newdictionary)
-        df.to_excel(r'testeexcel.xlsx')
-        print(df)
+        df.to_excel(r'/Users/mac/Documents/Lista FCA Leandro/CNPJ empresas/testeexcel.xlsx')
+        #print(df)
         
 print("Your program has been started!")
 #add_file_txt()
