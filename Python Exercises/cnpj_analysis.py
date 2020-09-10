@@ -5,7 +5,7 @@ import os
 textsliced=[]
 data_cnpj_list=[]
 data_company_dict={}
-pathfile="/Users/mac/Documents/Lista FCA Leandro/CNPJ empresas/K3241.K03200DV.D00703.L00013.txt"
+pathfile="/Users/mac/Documents/Lista FCA Leandro/CNPJ empresas/K3241.K03200DV.D00703.L00020.txt"
 endfilenbr=20
 
 #Slicing the whole datafile in 1200 characters each time and filter only 
