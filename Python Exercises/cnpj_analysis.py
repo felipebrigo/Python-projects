@@ -5,17 +5,17 @@ import os
 textsliced=[]
 data_cnpj_list=[]
 data_company_dict={}
-pathfile="/Users/mac/Documents/Lista FCA Leandro/CNPJ empresas/K3241.K03200DV.D00703.L00001.txt"
-endfilenbr=1
+pathfile="/Users/mac/Documents/Lista FCA Leandro/CNPJ empresas/K3241.K03200DV.D00703.L00013.txt"
+endfilenbr=20
 
 #Slicing the whole datafile in 1200 characters each time and filter only 
 #companies who is active (in operation)
 def slicing():
     global textsliced
     company_active=[]
-    with open(pathfile, "r",encoding="Latin-1") as r:
-        r=r.read()
-        textsliced=[r[i:(i+1201)] for i in range(0, len(r),1201)]
+    with open(pathfile, "r",encoding="UTF-8",errors="replace") as r:
+        textsliced=r.readlines()
+        #textsliced=[r[i:(i+1201)] for i in range(0, len(r),1201)]
         for item in range(0,len(textsliced)):
             if textsliced[item][0]=='1':
                 if textsliced[item][223:225]=='02':
@@ -26,9 +26,9 @@ def slicing():
 
 def openfile(programnumber):
     global textsliced
-    with open(str("/Users/mac/Documents/Lista FCA Leandro/CNPJ empresas/cnpj" + str(programnumber) + ".txt"), "r",encoding="latin-1") as r:
-        r=r.read()
-        textsliced=[r[i:(i+1201)] for i in range(0, len(r), 1201)]
+    with open(str("/Users/mac/Documents/Lista FCA Leandro/CNPJ empresas/cnpj" + str(programnumber) + ".txt"), "r",encoding="UTF-8",errors="replace") as r:
+        textsliced=r.readlines()
+        #textsliced=[r[i:(i+1201)] for i in range(0, len(r), 1201)]
 
 def file_type():
     global textsliced
@@ -67,18 +67,18 @@ def data_cnpj(text):
 def write_txt_file():
     with open("/Users/mac/Documents/Lista FCA Leandro/CNPJ empresas/cnpj-consolidado-filtrado.txt","a", newline="") as cnpj:
         for j in range (0,len(data_cnpj_list)):
-            cnpj.writelines(str(data_cnpj_list[j])+'\n')
+            cnpj.writelines(str(data_cnpj_list[j]))
      
 #Main
 def mainprogram():
     print("Your program has been started!")
     #slicing() 
-
+    
     for programnumber in range(1,(endfilenbr+1)):
         openfile(programnumber)
         file_type()
         write_txt_file()
-                   
+                       
     print("Your program has been concluded successfully!")
         
 start = timer()
