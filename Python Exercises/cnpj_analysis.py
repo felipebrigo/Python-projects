@@ -1,4 +1,5 @@
 #import timeit
+import pandas as pd
 from timeit import default_timer as timer
 import os
 
@@ -42,46 +43,54 @@ def file_type():
 
 #Company treatment - 1200 characters    
 def data_cnpj(text):
-    data_company_dict={'cnpj':str(text[3:17]).strip(), 
-                       'unid':str(text[17:18]).strip(),
-                       'razaosocial':str(text[18:168]).strip(),
-                       'nomefantasia':str(text[168:223]).strip(),
-                       'inicioatividade':str(text[367:375]).strip(),
-                       'cnaeprincipal':str(text[375:382]).strip(),
-                       'tipoendereco':str(text[382:402]).strip(),
-                       'endereco':str(text[402:462]).strip(),
-                       'numero':str(text[462:468]).strip(),
-                       'complemento':str(text[468:624]).strip(),
-                       'bairro':str(text[624:674]).strip(),
-                       'cep':str(text[674:682]).strip(),
-                       'uf':str(text[682:684]).strip(),
-                       'cidade':str(text[688:738]).strip(),
-                       'telefone1':str(text[738:750]).strip(),
-                       'telefone2':str(text[750:762]).strip(),
-                       'email':str(text[774:889]).strip(),
-                       'capitalsocial':str(text[891:905]).strip(),
-                       'porteempresa':str(text[905:907]).strip()}
+    data_company_dict={"cnpj":str(text[3:17]).strip(), 
+                       "unid":str(text[17:18]).strip(),
+                       "razaosocial":(str(text[18:168]).replace("'","-")).strip(),
+                       "nomefantasia":(str(text[168:223]).replace("'","-")).strip(),
+                       "inicioatividade":str(text[367:375]).strip(),
+                       "cnaeprincipal":str(text[375:382]).strip(),
+                       "tipoendereco":str(text[382:402]).strip(),
+                       "endereco":(str(text[402:462]).replace("'","-")).strip(),
+                       "numero":str(text[462:468]).strip(),
+                       "complemento":str(text[468:624]).strip(),
+                       "bairro":(str(text[624:674]).replace("'","-")).strip(),
+                       "cep":str(text[674:682]).strip(),
+                       "uf":str(text[682:684]).strip(),
+                       "cidade":(str(text[688:738]).replace("'","-")).strip(),
+                       "telefone1":str(text[738:750]).strip(),
+                       "telefone2":str(text[750:762]).strip(),
+                       "email":str(text[774:889]).strip(),
+                       "capitalsocial":str(text[891:905]).strip(),
+                       "porteempresa":str(text[905:907]).strip()}
     data_cnpj_list.append(data_company_dict.copy())
 
+def pandas_dataframe():
+    
+    global data_cnpj_list
+    df=pd.DataFrame(data_cnpj_list)
+    print(df)
+    df.to_csv(r'/Users/mac/Documents/Lista FCA Leandro/CNPJ empresas/export_dataframe.csv')
+    
+    
 #Export to csv file
 def write_txt_file():
+    print(len(data_cnpj_list))
     with open("/Users/mac/Documents/Lista FCA Leandro/CNPJ empresas/cnpj-consolidado-filtrado.txt","a", newline="") as cnpj:
         for j in range (0,len(data_cnpj_list)):
             cnpj.writelines(str(data_cnpj_list[j]))
      
 #Main
 def mainprogram():
-    print("Your program has been started!")
     #slicing() 
-    
     for programnumber in range(1,(endfilenbr+1)):
         openfile(programnumber)
         file_type()
-        write_txt_file()
-                       
-    print("Your program has been concluded successfully!")
-        
+
+print("Your program has been started!")        
 start = timer()
 mainprogram()
+write_txt_file()
+pandas_dataframe()
 end = timer()
 print(end - start)
+print("Your program has been concluded successfully!")
