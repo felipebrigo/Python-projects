@@ -1,7 +1,6 @@
 import pandas as pd
 import json
 import ast
-import smtplib
 
 newdictionary=[]
 def add_file_txt():
@@ -62,30 +61,48 @@ def counting():
 
 def email():
     import smtplib
-    PARA = "comercial.leoma@gmail.com"      #e-mail destino
-    USUARIO= "comercial.leoma.auto@gmail.com"      #seu  email no google
-    SENHA= "comercial.leoma.auto2020"                  #sua senha no google
+    import imghdr
+    from email.message import EmailMessage
+    msg=EmailMessage()
+    para=[] #e-mail destino
+    user= "comercial.leoma.auto@gmail.com"      #seu  email no google
+    password= "comercial.leoma.auto2020"                  #sua senha no google
     
-    ASSUNTO= "teste de envio de email via python\n"
-    TEXTO= "Email enviado através de um programa python\n\n"
+    string="Boa tarde./nSou Felipe Brigo, gerente comercial da Leoma Auto Partes, representante da \033[14;31mMOPAR\033[m, braço de vendas do grupo \033[14;31mFIAT/JEEP/CHRYSLER – FCA\033[m./n/nVenho com este email oferecer nossos serviços e as incríveis ofertas que temos disponíveis em nossa linha. São peças \033[14;31m100% ORIGINAIS, COM PREÇOS BEM REDUZIDOS E ATRATIVOS\033[m e com \033[14;31mTODA GARANTIA FCA QUE SEU CLIENTE DESEJA\033[m, faturadas diretamente da \033[14;31mFIAT\033[m e suas concessionárias com entrega especial para você, nosso cliente!/n/nSegue abaixo alguns exemplos de nossas ofertas:"
     
     print ("Enviando email")
-    smtpserver= smtplib.SMTP("smtp.gmail.com",587)
-    smtpserver.ehlo()
-    smtpserver.starttls()
-    smtpserver.ehlo()
-    smtpserver.login(USUARIO,SENHA)
-    msg= "Testando Mensagem Automatica"
-    
-    smtpserver.sendmail(USUARIO,PARA,msg)
-    smtpserver.quit() 
+    with open("/Users/mac/Documents/Lista FCA Leandro/email-list.txt",'r') as f:
+        mailto=f.readlines()
+        
+    msg.set_content(string)
+    msg['From']=user
+    msg['To']=para
+    msg['Subject']="LEOMA - OPORTUNIDADE DE PEÇAS FIAT/CHRYSLER/JEEP - Normal"
+    try:
+        smtpserver= smtplib.SMTP("smtp.gmail.com",25)
+        smtpserver.connect("smtp.gmail.com",587)
+        smtpserver.ehlo()
+        smtpserver.starttls()
+        smtpserver.ehlo()
+        smtpserver.login(user,password)
+        #smtpserver.sendmail(USUARIO,PARA,msg)
+        file="/Users/mac/Downloads/Captura de Tela 2020-09-22 às 14.01.00 (2).png"
+        with open(file, 'rb') as fp:
+            img_data = fp.read()
+        msg.add_attachment(img_data, maintype='image',subtype=imghdr.what(None, img_data))
+        smtpserver.send_message(msg)
+    except Exception as e:
+        with open ("Errors.txt",mode="a") as errorlist:
+            errorlist.writelines(e)
+    finally:
+        smtpserver.quit() 
     print ("Email enviado")
     
 print("Your program has been started!")
 #add_file_txt()
 #convertfile()
-counting()
+#counting()
 #testingfile()
-#email()
+email()
 
 print("Your program has been finished!")     
