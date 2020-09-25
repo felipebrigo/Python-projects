@@ -118,7 +118,7 @@ Atenciosamente\n
 
 Felipe Brigo
 Leoma Auto Repres. Com. E Consultoria 
-Cel/Whatsapp 55 11 99485-7565
+Cel/Whatsapp 55 11 99709-5397
 comercial.leoma.auto@gmail.com
     
 """
@@ -142,7 +142,7 @@ comercial.leoma.auto@gmail.com
             img_data = fp.read()
         msg.add_attachment(img_data, maintype='image',subtype=imghdr.what(None, img_data))
         msg['To']="comercial.leoma@gmail.com"
-        for para in range(201,len(mailto)):
+        for para in range(453,len(mailto)):
             smtpserver.send_message(msg)
             msg.replace_header('To',mailto[para])
             
