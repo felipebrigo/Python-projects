@@ -14,7 +14,7 @@ plt.style.use('fivethirtyeight')
 #to predict the closing stock price of a corporation (Apple Inc.) using the past 60 days stock price
 
 #Get the stock quote and show in graph matplotlib
-df=web.DataReader('AAPL', data_source='yahoo', start='2012-01-01', end='2019-12-17')
+df=web.DataReader('BRL=X', data_source='yahoo', start='2012-01-01', end='2019-12-17')
 print(df)
 plt.figure(figsize=(16, 8))
 plt.title("Close Price History")
@@ -72,7 +72,7 @@ model.fit(x_train, y_train, batch_size=1, epochs=1)
 
 #Create the testing dataset
 #Create a new array containing the scaled values from index 1543 to 2003
-test_data=scaled_data[training_data_len - 60:2003, :]
+test_data=scaled_data[training_data_len - 60:2073, :]
 
 #Create the datasets x_test and y_test
 x_test=[]
@@ -114,7 +114,7 @@ print(valid)
 
 #How to predict a stock price in a specific date (17-12-2019)
 #Get the quote
-apple_quote=web.DataReader("AAPL", data_source='yahoo', start='2012-01-01', end='2019-12-17')
+apple_quote=web.DataReader("BRL=X", data_source='yahoo', start='2012-01-01', end='2019-12-17')
 #Create a new dataframe with closing prices
 new_df=apple_quote.filter(['Close'])
 #Get the last 60 days and convert the dataframe to an array

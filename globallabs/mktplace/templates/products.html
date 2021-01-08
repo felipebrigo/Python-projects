@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <ul>
+        {% for product in products %}
+            <a href="{% url 'update_products' product.id %}">
+                <li>{{ product.code }}</li>
+            </a>
+        {% endfor %}
+    </ul>
+
+    <a href="{% url 'create_products' %}">New Product</a>
+    <a href="{% url 'MaterialListView' %}">Test Page</a>
+</body>
+</html>
