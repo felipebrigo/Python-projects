@@ -1,27 +1,13 @@
+from django.urls import reverse_lazy
+
 from .models import Product
 from django.shortcuts import render, redirect
 from .forms import ProductForm
 from django.views.generic.list import ListView
+from django.views.generic import TemplateView, CreateView
+from django.views.generic.edit import UpdateView, DeleteView
 
-'''
-from django.views.generic import TemplateView
-from django.views.generic.base import View
-
-
-class IndexTemplateView(TemplateView):
-    template_name = "index.html"
-
-def listar_material(request):
-
-    #evento = Evento.objects.filter(usuario=usuario, data_evento__gt=data_atual)
-    #dados = {'eventos': evento}
-    #return render(request, 'agenda.html', dados)
-
-    material = Material.objects.all()
-    return render(request, 'products-form.html', {'materiais': material})
-
-'''
-
+# ------- CRUD RECEIVING REQUEST AND ID FROM HTTP --------
 
 def list_products(request):
     products = Product.objects.all()
@@ -55,10 +41,48 @@ def delete_products(request, id):
         return redirect('list_products')
     return render(request, 'prod-delete-confirm.html', {'product': product})
 
+# ------- CRUD USING PRE-CREATED VIEWS INSIDE DJANGO/PYTHON --------
 
-class MaterialListView(ListView):
-    template_name = 'test.html'
+class ProductCreateView(CreateView):
+    template_name = 'products-form.html'
+    model = Product
+    form_class = ProductForm
+    success_url = reverse_lazy('ProductListView')
+
+
+class ProductDeleteView(DeleteView):
+    template_name = 'prod-delete-confirm.html'
+    model = Product
+    context_object_name = 'product'
+    success_url = reverse_lazy('ProductListView')
+
+
+class ProductListView(ListView):
+    template_name = 'products.html'
     model = Product
     context_object_name = 'allproducts'
 
+
+class IndexTemplateView(TemplateView):
+    template_name = "index.html"
+
+
+class ProductUpdateView(UpdateView):
+    template_name = 'products-update.html'
+    model = Product
+    fields = '__all__'
+    context_object_name = 'product'
+    success_url = reverse_lazy('ProductListView')
+
+'''
+    def get_object(self, queryset=None):
+        product = None
+        id = self.kwargs.get(self.pk_url_kwarg)
+
+        if id is not None:
+            # Busca o produto a partir do id
+            product = Product.objects.filter(id=id).first()
+
+        return product
+'''
 # Create your views here.

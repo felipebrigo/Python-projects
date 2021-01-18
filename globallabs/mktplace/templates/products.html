@@ -1,3 +1,75 @@
+{% extends "_layouts/base.html" %}
+
+{% block title %}Lista de Produtos{% endblock %}
+
+{% block conteudo %}
+<div class="container">
+  <div class="row">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Lista de Produtos</h5>
+
+          {% if allproducts|length > 0 %}
+            <p class="card-text">
+              Aqui está a lista de <code>Produtos</code> cadastrados.
+            </p>
+
+            <table class="table">
+              <thead class="thead-dark">
+              <tr>
+                <th>Codigo</th>
+                <th>Elemento</th>
+                <th>Liga</th>
+                <th>Formato</th>
+                <th>Estoque</th>
+                <th>Preço</th>
+                <th>Ações</th>
+              </tr>
+              </thead>
+
+              <tbody>
+              {% for product in allproducts %}
+                <tr>
+                  <td>{{ product.code }}</td>
+                  <td>{{ product.element }}</td>
+                  <td>{{ product.alloy }}</td>
+                  <td>{{ product.shape }}</td>
+                  <td>{{ product.stock }}</td>
+                  <td>{{ product.price }}</td>
+                  <td>
+                    <a href="{% url 'ProductUpdateView' product.id %}"
+                       class="btn btn-info">
+                      Atualizar
+                    </a>
+                    <a href="{% url 'ProductDeleteView' product.id %}"
+                      class="btn btn-outline-danger">
+                        Excluir
+                    </a>
+                  </td>
+                </tr>
+              {% endfor %}
+              </tbody>
+            </table>
+        {% else %}
+          <div class="text-center mt-5 mb-5 jumbotron">
+            <h5>Nenhum <code>Produto</code> cadastrado ainda.</h5>
+          </div>
+        {% endif %}
+          <hr />
+          <div class="text-right">
+            <a href="{% url 'ProductCreateView' %}" class="btn btn-primary">
+              Cadastrar Produtos
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+<!-- GENERAL LIST EXAMPLE WITHOUT FORMAT ----------
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,13 +79,14 @@
 <body>
     <ul>
         {% for product in products %}
-            <a href="{% url 'update_products' product.id %}">
+            <a href="{% url 'ProductUpdateView' product.id %}">
                 <li>{{ product.code }}</li>
             </a>
         {% endfor %}
     </ul>
 
-    <a href="{% url 'create_products' %}">New Product</a>
-    <a href="{% url 'MaterialListView' %}">Test Page</a>
+    <a href="{% url 'ProductCreateView' %}">New Product</a>
+    <a href="{% url 'ProductListView' %}">Test Page</a>
 </body>
 </html>
+-->

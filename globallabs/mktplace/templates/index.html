@@ -1,10 +1,44 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Hello Marketplace</title>
-</head>
-<body>
-    <h1>Hello MarketPlace - This is our 1st step</h1>
-</body>
-</html>
+<!--Estendendo do template Base.html-->
+{%extends "_layouts/base.html"%}
+
+<!--Bloco que define o <title>-->
+{%block title%}Página Inicial{%endblock%}
+
+<!--Bloco de conteúdo-->
+{% block conteudo %}
+<div class="container">
+  <div class="row">
+    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Cadastrar Produto</h5>
+          <p class="card-text">
+            Cadastre aqui um novo <code>Produto</code>.
+          </p>
+          <a href="{% url 'ProductCreateView' %}"
+             class="btn btn-primary">
+            Novo Produto
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Lista de Produtos</h5>
+          <p class="card-text">
+            Veja aqui a lista de <code>Produtos</code> cadastrados.
+          </p>
+          <a href="{% url 'ProductListView' %}"
+             class="btn btn-primary">
+            Vá para Lista
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+<!--Teste de propriedades disponíveis no Django-->
+<!--<h1>Hello, {{user.email}}</h1>-->
