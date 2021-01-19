@@ -3,15 +3,17 @@ from django.urls import reverse_lazy
 from .models import Product
 from django.shortcuts import render, redirect
 from .forms import ProductForm
-from django.views.generic.list import ListView
 from django.views.generic import TemplateView, CreateView
+from django.contrib.auth.decorators import login_required
+from django.views.generic.list import ListView
 from django.views.generic.edit import UpdateView, DeleteView
 
 # ------- CRUD RECEIVING REQUEST AND ID FROM HTTP --------
 
+@login_required(login_url='login/')
 def list_products(request):
-    products = Product.objects.all()
-    return render(request, 'products.html', {'products': products})
+    allproducts = Product.objects.all()
+    return render(request, 'products.html', {'allproducts': allproducts})
 
 
 def create_products(request):
@@ -41,8 +43,17 @@ def delete_products(request, id):
         return redirect('list_products')
     return render(request, 'prod-delete-confirm.html', {'product': product})
 
-# ------- CRUD USING PRE-CREATED VIEWS INSIDE DJANGO/PYTHON --------
 
+def login_user(request):
+    return render(request, 'login.html')
+
+
+class IndexTemplateView(TemplateView):
+    template_name = "index.html"
+
+
+# ------- CRUD USING PRE-CREATED VIEWS INSIDE DJANGO/PYTHON --------
+'''
 class ProductCreateView(CreateView):
     template_name = 'products-form.html'
     model = Product
@@ -62,10 +73,8 @@ class ProductListView(ListView):
     model = Product
     context_object_name = 'allproducts'
 
-
 class IndexTemplateView(TemplateView):
     template_name = "index.html"
-
 
 class ProductUpdateView(UpdateView):
     template_name = 'products-update.html'
@@ -74,7 +83,7 @@ class ProductUpdateView(UpdateView):
     context_object_name = 'product'
     success_url = reverse_lazy('ProductListView')
 
-'''
+
     def get_object(self, queryset=None):
         product = None
         id = self.kwargs.get(self.pk_url_kwarg)
@@ -85,4 +94,3 @@ class ProductUpdateView(UpdateView):
 
         return product
 '''
-# Create your views here.

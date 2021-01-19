@@ -38,11 +38,11 @@
                   <td>{{ product.stock }}</td>
                   <td>{{ product.price }}</td>
                   <td>
-                    <a href="{% url 'ProductUpdateView' product.id %}"
+                    <a href="{% url 'update_products' product.id %}"
                        class="btn btn-info">
                       Atualizar
                     </a>
-                    <a href="{% url 'ProductDeleteView' product.id %}"
+                    <a href="{% url 'delete_products' product.id %}"
                       class="btn btn-outline-danger">
                         Excluir
                     </a>
@@ -58,7 +58,7 @@
         {% endif %}
           <hr />
           <div class="text-right">
-            <a href="{% url 'ProductCreateView' %}" class="btn btn-primary">
+            <a href="{% url 'create_products' %}" class="btn btn-primary">
               Cadastrar Produtos
             </a>
           </div>
