@@ -6,15 +6,17 @@ from .forms import ProductForm
 from django.views.generic import TemplateView, CreateView
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
+from django.contrib import messages
 from django.views.generic.list import ListView
 from django.views.generic.edit import UpdateView, DeleteView
 
 # ------- CRUD RECEIVING REQUEST AND ID FROM HTTP --------
 
-@login_required(login_url='login/')
+
 def list_products(request):
     allproducts = Product.objects.all()
     return render(request, 'products.html', {'allproducts': allproducts})
+
 
 @login_required(login_url='login/')
 def create_products(request):
@@ -25,6 +27,7 @@ def create_products(request):
         return redirect('list_products')
     return render(request,'products-form.html', {'form': form})
 
+
 @login_required(login_url='login/')
 def update_products(request, id):
     product = Product.objects.get(id=id)
@@ -34,6 +37,7 @@ def update_products(request, id):
         form.save()
         return redirect('list_products')
     return render(request, 'products-form.html', {'form': form, 'product': product})
+
 
 @login_required(login_url='login/')
 def delete_products(request, id):
@@ -48,9 +52,11 @@ def delete_products(request, id):
 def login_user(request):
     return render(request, 'login.html')
 
+
 def logout_user(request):
     logout(request)
     return redirect('/')
+
 
 def submit_login(request):
     if request.POST:
@@ -60,8 +66,9 @@ def submit_login(request):
         if usuario is not None:
             login(request, usuario)
             return redirect('index')
-    else:
-        return redirect('/')
+        else:
+            messages.error(request, "Usuario ou senha inválidos")
+    return redirect('/')
 
 
 class IndexTemplateView(TemplateView):

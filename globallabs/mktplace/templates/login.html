@@ -16,5 +16,10 @@
             <button type="submit">Entrar</button>
         </div>
     </form>
+    <div align="center">
+    {%for message in messages%}
+        <strong>ERRO: </strong>{{message}}
+    {%endfor%}
+    </div>
 </body>
 </html>
