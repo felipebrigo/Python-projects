@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import list_products, create_products, update_products, delete_products, login_user, IndexTemplateView
+from .views import list_products, create_products, update_products, delete_products, login_user, IndexTemplateView, submit_login, logout_user
 from django.views.generic import RedirectView
 
 
@@ -8,8 +8,10 @@ from django.views.generic import RedirectView
 urlpatterns = [
     path('', RedirectView.as_view(url='/login/')),
     path('login/', login_user, name='login_user'),
+    path('login/submit', submit_login),
+    path('logout/', logout_user, name='logout_user'),
     path('index/', IndexTemplateView.as_view(), name="index"),
-    path('newproduct', create_products, name='create_products'),
+    path('newproduct/', create_products, name='create_products'),
     path('updateproduct/<int:id>/', update_products, name='update_products'),
     path('deleteproduct/<int:id>/', delete_products, name='delete_products'),
     path('productlist/', list_products, name='list_products'),

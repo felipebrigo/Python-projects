@@ -5,6 +5,7 @@ from django.shortcuts import render, redirect
 from .forms import ProductForm
 from django.views.generic import TemplateView, CreateView
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth import authenticate, login, logout
 from django.views.generic.list import ListView
 from django.views.generic.edit import UpdateView, DeleteView
 
@@ -15,7 +16,7 @@ def list_products(request):
     allproducts = Product.objects.all()
     return render(request, 'products.html', {'allproducts': allproducts})
 
-
+@login_required(login_url='login/')
 def create_products(request):
     form = ProductForm(request.POST or None)
 
@@ -24,7 +25,7 @@ def create_products(request):
         return redirect('list_products')
     return render(request,'products-form.html', {'form': form})
 
-
+@login_required(login_url='login/')
 def update_products(request, id):
     product = Product.objects.get(id=id)
     form = ProductForm(request.POST or None, instance=product)
@@ -34,7 +35,7 @@ def update_products(request, id):
         return redirect('list_products')
     return render(request, 'products-form.html', {'form': form, 'product': product})
 
-
+@login_required(login_url='login/')
 def delete_products(request, id):
     product = Product.objects.get(id=id)
 
@@ -46,6 +47,21 @@ def delete_products(request, id):
 
 def login_user(request):
     return render(request, 'login.html')
+
+def logout_user(request):
+    logout(request)
+    return redirect('/')
+
+def submit_login(request):
+    if request.POST:
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        usuario = authenticate(username=username, password=password)
+        if usuario is not None:
+            login(request, usuario)
+            return redirect('index')
+    else:
+        return redirect('/')
 
 
 class IndexTemplateView(TemplateView):
