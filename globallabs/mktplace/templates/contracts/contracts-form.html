@@ -1,0 +1,167 @@
+{% extends "_layouts/base.html" %}
+
+{% load widget_tweaks %}
+
+{%block title%}New-Update page{%endblock%}
+
+{%block conteudo%}
+<div class="container">
+  <form method="post">
+    {% csrf_token %}
+    <div class="form-row">
+      <div class="form-group col-lg-3 col-md-4 col-sm-6 col-xs-12">
+        <label for="contractNumber">Numero de Contrato</label>
+        <input type="text" class="form-control" id="contractNumber" placeholder="Contract Number" >
+      </div>
+      <div class="form-group col-lg-3 col-md-4 col-sm-6 col-xs-12">
+        <label for="counterParty">Contra-Parte</label>
+        <input type="text" class="form-control" id="counterParty" placeholder="Counter Party">
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" id="isPurchase" checked>
+        <label class="form-check-label" for="isPurchase">
+          Contrato de Compra?
+        </label>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group col-lg-3 col-md-4 col-sm-4 col-xs-12">
+          <label for="product">Produto:</label>
+          <select id="product" class="form-control">
+            <option selected>Lingote Al</option>
+            <option>Tarugo Al</option>
+            <option>Vergalhão Al</option>
+          </select>
+      </div>
+       <div class="form-group col-lg-3 col-md-4 col-sm-4 col-xs-12">
+          <label for="alloy">Liga:</label>
+          <select id="alloy" class="form-control">
+            <option selected>P1020</option>
+            <option>6060</option>
+            <option>6063</option>
+            <option>1350</option>
+          </select>
+      </div>
+       <div class="form-group col-lg-3 col-md-4 col-sm-4 col-xs-12">
+          <label for="shape">Formato:</label>
+          <select id="shape" class="form-control">
+            <option selected>Lingote</option>
+            <option>5000mm</option>
+            <option>5300mm</option>
+            <option>Bobinas 2mt</option>
+          </select>
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" id="isRange" checked>
+        <label class="form-check-label" for="isRange">
+          Volume fixo?
+        </label>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group col-lg-3 col-md-4 col-sm-4 col-xs-12">
+        <label for="minVol">Volume Mínimo</label>
+        <input type=number class="form-control" id="minVol" placeholder="123">
+      </div>
+        <div class="form-group col-lg-3 col-md-4 col-sm-4 col-xs-12">
+        <label for="maxVol">Volume Máximo</label>
+        <input type=number class="form-control" id="maxVol" placeholder="123">
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group col-md-3">
+          <label for="supplier">Fornecedor:</label>
+          <select id="supplier" class="form-control">
+            <option selected>Alcoa</option>
+            <option>CBA</option>
+            <option>RIO TINTO</option>
+            <option>PRESSMETAL</option>
+          </select>
+      </div>
+       <div class="form-group col-md-3">
+          <label for="allocationCtr">Contrato de compra:</label>
+          <select id="allocationCtr" class="form-control">
+            <option selected>ALP-3-00123-P</option>
+            <option>...</option>
+          </select>
+      </div>
+    </div>
+    <button type="submit" class="btn btn-primary">Enviar</button>
+  </form>
+</div>
+
+<!--
+<div class="container">
+  <div class="row">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Cadastro de Contratos</h5>
+          <p class="card-text">
+            Complete o formulário abaixo para cadastrar
+            um novo <code>Contrato</code>.
+          </p>
+          <form method="post">
+            {% csrf_token %}
+
+            <- Contract Number ->
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text">Contract Number</span>
+              </div>
+                {% render_field form.contractNumber class+="form-control" %}
+            </div>
+
+            <- Element ->
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text">Element</span>
+              </div>
+                {% render_field form.element class+="form-control" %}
+            </div>
+
+              <- Alloy ->
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text">Alloy</span>
+              </div>
+                {% render_field form.alloy class+="form-control" %}
+            </div>
+
+              <- Shape ->
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text">Shape</span>
+              </div>
+                {% render_field form.shape class+="form-control" %}
+            </div>
+
+              <- Stock ->
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text">Stock</span>
+              </div>
+                {% render_field form.stock class+="form-control" %}
+            </div>
+
+              <- Price ->
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text">Price</span>
+              </div>
+                {% render_field form.price class+="form-control" %}
+            </div>
+
+        <button class="btn btn-primary">Enviar</button>
+      </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+-->
+{%endblock%}

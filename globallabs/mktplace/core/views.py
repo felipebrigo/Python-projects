@@ -1,8 +1,8 @@
 from django.urls import reverse_lazy
 
-from .models import Product
+from .models import Product, Contract
 from django.shortcuts import render, redirect
-from .forms import ProductForm
+from .forms import ProductForm, ContractForm
 from django.views.generic import TemplateView, CreateView
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
@@ -15,7 +15,7 @@ from django.views.generic.edit import UpdateView, DeleteView
 
 def list_products(request):
     allproducts = Product.objects.all()
-    return render(request, 'products.html', {'allproducts': allproducts})
+    return render(request, 'products/products.html', {'allproducts': allproducts})
 
 
 @login_required(login_url='login/')
@@ -25,7 +25,7 @@ def create_products(request):
     if form.is_valid():
         form.save()
         return redirect('list_products')
-    return render(request,'products-form.html', {'form': form})
+    return render(request,'products/products-form.html', {'form': form})
 
 
 @login_required(login_url='login/')
@@ -36,7 +36,7 @@ def update_products(request, id):
     if form.is_valid():
         form.save()
         return redirect('list_products')
-    return render(request, 'products-form.html', {'form': form, 'product': product})
+    return render(request, 'products/products-form.html', {'form': form, 'product': product})
 
 
 @login_required(login_url='login/')
@@ -46,11 +46,12 @@ def delete_products(request, id):
     if request.method == 'POST':
         product.delete()
         return redirect('list_products')
-    return render(request, 'prod-delete-confirm.html', {'product': product})
+    return render(request, 'products/prod-delete-confirm.html', {'product': product})
 
+# ---------- USER LOGIN/LOGOUT REQUIRED ------------
 
 def login_user(request):
-    return render(request, 'login.html')
+    return render(request, 'login/login.html')
 
 
 def logout_user(request):
@@ -73,6 +74,45 @@ def submit_login(request):
 
 class IndexTemplateView(TemplateView):
     template_name = "index.html"
+
+
+# ----- CRUD CONTRACT -----
+
+
+def list_contract(request):
+    allcontracts = Contract.objects.all()
+    return render(request, 'contracts/contracts.html', {'allcontracts': allcontracts})
+
+
+@login_required(login_url='login/')
+def create_contracts(request):
+    form = ContractForm(request.POST or None)
+
+    if form.is_valid():
+        form.save()
+        return redirect('list_contracts')
+    return render(request,'contracts/contracts-form.html', {'form': form})
+
+
+@login_required(login_url='login/')
+def update_contracts(request, id):
+    contract = Contract.objects.get(id=id)
+    form = ContractForm(request.POST or None, instance=contract)
+
+    if form.is_valid():
+        form.save()
+        return redirect('list_contracts')
+    return render(request, 'contracts/contracts-form.html', {'form': form, 'contract': contract})
+
+
+@login_required(login_url='login/')
+def delete_contracts(request, id):
+    contract = Contract.objects.get(id=id)
+
+    if request.method == 'POST':
+        contract.delete()
+        return redirect('list_contracts')
+    return render(request, 'contracts/ctr-delete-confirm.html', {'contract': contract})
 
 
 # ------- CRUD USING PRE-CREATED VIEWS INSIDE DJANGO/PYTHON --------

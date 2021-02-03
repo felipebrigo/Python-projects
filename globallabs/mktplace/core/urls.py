@@ -1,8 +1,6 @@
 from django.urls import path
-from .views import list_products, create_products, update_products, delete_products, login_user, IndexTemplateView, submit_login, logout_user
+from .views import list_products, create_products, update_products, delete_products, login_user, IndexTemplateView,submit_login, logout_user, create_contracts, delete_contracts, update_contracts, list_contract
 from django.views.generic import RedirectView
-
-
 
 
 urlpatterns = [
@@ -15,6 +13,11 @@ urlpatterns = [
     path('updateproduct/<int:id>/', update_products, name='update_products'),
     path('deleteproduct/<int:id>/', delete_products, name='delete_products'),
     path('productlist/', list_products, name='list_products'),
+
+    path('newcontract/', create_contracts, name='create_contracts'),
+    path('updatecontract/<int:id>/', update_contracts, name='update_contracts'),
+    path('deletecontract/<int:id>/', delete_contracts, name='delete_contracts'),
+    path('contractlist/', list_contract, name='list_contract'),
 
 ]
 

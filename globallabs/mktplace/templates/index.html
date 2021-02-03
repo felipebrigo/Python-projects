@@ -6,6 +6,43 @@
 
 <!--Bloco de conteúdo-->
 {% block conteudo %}
+
+<!-- Cadastrar Contratos -->
+<div class="container">
+  <div class="row">
+    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Cadastrar Contratos</h5>
+          <p class="card-text">
+            Cadastre aqui um novo <code>Contrato</code>.
+          </p>
+          <a href="{% url 'create_contracts' %}"
+             class="btn btn-primary">
+            Novo Contrato
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Lista de Contratos</h5>
+          <p class="card-text">
+            Veja aqui a lista de <code>Contratos</code> cadastrados.
+          </p>
+          <a href="{% url 'list_contracts' %}"
+             class="btn btn-primary">
+            Vá para Lista
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+
+<!-- Cadastrar Produtos -->
 <div class="container">
   <div class="row">
     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
