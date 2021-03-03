@@ -15,6 +15,26 @@
     <!--Bloco de Estilos-->
     {% block styles %}{% endblock %}
 
+    <script>
+
+        var maxVolProperty = '<input type=number class="form-control" id="maxVol" placeholder="123">'
+
+        function disapear_volmax(){
+            if (document.getElementById("isRange").innerHTML = checked') {
+                hidden = '<input type=number class="form-control" id="maxVol" placeholder="123" hidden>';
+                document.getElementById("maxVol").onclick = hidden;
+                alert(hidden);
+
+            };
+
+        }
+
+        document.addEventListener('DOMContentLoaded', function(){
+            document.getElementById("maxVol").onclick = disapear_volmax;
+        });
+
+    </script>
+
 </head>
 <body>
     <!-- Navbar -->
