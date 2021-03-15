@@ -73,7 +73,7 @@ def submit_login(request):
 
 
 class IndexTemplateView(TemplateView):
-    template_name = "index.html"
+    template_name = "index/index.html"
 
 
 # ----- CRUD CONTRACT -----
