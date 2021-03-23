@@ -11,11 +11,11 @@
     <div class="form-row">
       <div class="form-group col-lg-3 col-md-4 col-sm-6 col-xs-12">
         <label for="contractNumber">Numero de Contrato</label>
-        {% render_field form.contractNumber class+="form-control" id+="contractNumber" placeholder+="Contract Number"%}
+        <input type=text class="form-control" id="contractNumber" placeholder="Contract Number">
       </div>
       <div class="form-group col-lg-3 col-md-4 col-sm-6 col-xs-12">
         <label for="counterParty">Contra-Parte</label>
-        {% render_field form.counterParty class+="form-control" id+="counterParty" placeholder+="Counter Party" rows="1" %}
+        <input type=text class="form-control" id="counterParty" placeholder="Counter Party">
       </div>
     </div>
     <div class="form-group" hidden="true">
@@ -33,7 +33,6 @@
             <option selected>Lingote Al</option>
             <option>Tarugo Al</option>
             <option>Vergalhão Al</option>
-
           </select>
       </div>
        <div class="form-group col-lg-3 col-md-4 col-sm-4 col-xs-12">
@@ -45,7 +44,6 @@
             <option>1350</option>
           </select>
       </div>
-        {% render_field form.alloy class+="form-control" %}
        <div class="form-group col-lg-3 col-md-4 col-sm-4 col-xs-12">
           <label for="shape">Formato:</label>
           <select id="shape" class="form-control">
@@ -55,7 +53,6 @@
             <option>Bobinas 2mt</option>
           </select>
       </div>
-        {% render_field form.shape class+="form-control" %}
     </div>
     <div class="form-group">
       <div class="form-check">
@@ -64,19 +61,16 @@
           Volume fixo?
         </label>
       </div>
-        {% render_field form.isRange class+="form-control" %}
     </div>
     <div class="form-row">
       <div class="form-group col-lg-3 col-md-4 col-sm-4 col-xs-12" id="minimo">
         <label for="minVol">Volume Mínimo</label>
         <input type=number class="form-control" id="minVol" placeholder="123">
       </div>
-        {% render_field form.minVol class+="form-control" %}
         <div class="form-group col-lg-3 col-md-4 col-sm-4 col-xs-12">
         <label for="maxVol">Volume Máximo</label>
         <input type=number class="form-control" id="maxVol" placeholder="123">
       </div>
-        {% render_field form.maxVol class+="form-control" %}
     </div>
     <div class="form-row">
       <div class="form-group col-md-3">
@@ -88,7 +82,6 @@
             <option>PRESSMETAL</option>
           </select>
       </div>
-        {% render_field form.originSupplier class+="form-control" %}
        <div class="form-group col-md-3">
           <label for="allocationCtr">Contrato de compra:</label>
           <select id="allocationCtr" class="form-control">
@@ -96,7 +89,6 @@
             <option>...</option>
           </select>
       </div>
-        {% render_field form.allocationCtr class+="form-control" %}
     </div>
     <button type="submit" class="btn btn-primary">Enviar</button>
   </form>

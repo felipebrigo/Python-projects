@@ -18,7 +18,7 @@ class Product(models.Model):
 class Contract(models.Model):
     contractNumber = models.CharField(max_length=16, null=False, blank=False)
     isPurchase = models.BooleanField(default=False, null=False, blank=False)
-    counterParty = models.TextField(null=False, blank=False)
+    counterParty = models.CharField(max_length=50, null=False, blank=False)
     product = models.CharField(max_length=50, null=False, blank=False)
     alloy = models.TextField()
     shape = models.CharField(max_length=10)
