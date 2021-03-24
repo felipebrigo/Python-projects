@@ -17,7 +17,7 @@ urlpatterns = [
     path('newcontract/', create_contracts, name='create_contracts'),
     path('updatecontract/<int:id>/', update_contracts, name='update_contracts'),
     path('deletecontract/<int:id>/', delete_contracts, name='delete_contracts'),
-    path('contractlist/', list_contract, name='list_contract'),
+    path('newcontract/contractlist', list_contract, name='list_contract'),
 
 ]
 

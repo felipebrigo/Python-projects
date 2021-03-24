@@ -86,12 +86,34 @@ def list_contract(request):
 
 @login_required(login_url='login/')
 def create_contracts(request):
-    form = ContractForm(request.POST or None)
+    if request.POST or None:
+        contractNumber = request.POST.get('contractNumber')
+        counterParty = request.POST.get('counterParty')
+        product = request.POST.get('product')
+        alloy = request.POST.get('alloy')
+        shape = request.POST.get('alloy')
+        minVol = request.POST.get('minVol')
+        maxVol = request.POST.get('maxVol')
+        originSupplier = request.POST.get('supplier')
+        allocationCtr = request.POST.get('allocationCtr')
 
-    if form.is_valid():
-        form.save()
-        return redirect('list_contracts')
-    return render(request,'contracts/contracts-form.html', {'form': form})
+        isRange = 0
+        isPurchase = 0
+
+        Contract.objects.create(contractNumber=contractNumber,
+                                isPurchase=isPurchase,
+                                counterParty=counterParty,
+                                product=product,
+                                alloy=alloy,
+                                shape=shape,
+                                isRange=isRange,
+                                minVol=minVol,
+                                maxVol=maxVol,
+                                originSupplier=originSupplier,
+                                allocationCtr=allocationCtr
+                                )
+
+        return redirect('list_contract')
 
 
 @login_required(login_url='login/')
