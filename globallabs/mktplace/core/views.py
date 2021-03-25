@@ -120,7 +120,7 @@ def create_contracts(request):
     return render(request, 'contracts/contracts-form.html')
 
 
-@login_required(login_url='login/')
+#@login_required(login_url='login/')
 def update_contracts(request, id):
     contract = Contract.objects.get(id=id)
     form = ContractForm(request.POST or None, instance=contract)
@@ -131,7 +131,7 @@ def update_contracts(request, id):
     return render(request, 'contracts/contracts-form.html', {'form': form, 'contract': contract})
 
 
-@login_required(login_url='login/')
+#@login_required(login_url='login/')
 def delete_contracts(request, id):
     contract = Contract.objects.get(id=id)
 
