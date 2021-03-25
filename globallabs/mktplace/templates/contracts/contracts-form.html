@@ -6,21 +6,21 @@
 
 {%block conteudo%}
 <div class="container">
-  <form action="contractlist" method="POST">
+  <form method="POST">
     {% csrf_token %}
     <div class="form-row">
       <div class="form-group col-lg-3 col-md-4 col-sm-6 col-xs-12">
         <label for="contractNumber">Numero de Contrato</label>
-        <input type=text class="form-control" id="contractNumber" placeholder="Contract Number">
+        <input type=text class="form-control" id="contractNumber" name="contractNumber" placeholder="Contract Number">
       </div>
       <div class="form-group col-lg-3 col-md-4 col-sm-6 col-xs-12">
         <label for="counterParty">Contra-Parte</label>
-        <input type=text class="form-control" id="counterParty" placeholder="Counter Party">
+        <input type=text class="form-control" id="counterParty" name="counterParty" placeholder="Counter Party">
       </div>
     </div>
     <div class="form-group" hidden="true">
       <div class="form-check">
-        <input class="form-check-input" type="checkbox" id="isPurchase" checked>
+        <input class="form-check-input" type="checkbox" id="isPurchase" name="isPurchase" checked>
         <label class="form-check-label" for="isPurchase">
           Contrato de Compra?
         </label>
@@ -29,7 +29,7 @@
     <div class="form-row">
       <div class="form-group col-lg-3 col-md-4 col-sm-4 col-xs-12">
           <label for="product">Produto:</label>
-          <select id="product" class="form-control">
+          <select id="product" name="product" class="form-control">
             <option selected>Lingote Al</option>
             <option>Tarugo Al</option>
             <option>Vergalhão Al</option>
@@ -37,7 +37,7 @@
       </div>
        <div class="form-group col-lg-3 col-md-4 col-sm-4 col-xs-12">
           <label for="alloy">Liga:</label>
-          <select id="alloy" class="form-control">
+          <select id="alloy" name="alloy" class="form-control">
             <option selected>P1020</option>
             <option>6060</option>
             <option>6063</option>
@@ -46,7 +46,7 @@
       </div>
        <div class="form-group col-lg-3 col-md-4 col-sm-4 col-xs-12">
           <label for="shape">Formato:</label>
-          <select id="'shape'" class="form-control">
+          <select id="shape" name="shape" class="form-control">
             <option selected>Lingote</option>
             <option>5000mm</option>
             <option>5300mm</option>
@@ -65,17 +65,17 @@
     <div class="form-row">
       <div class="form-group col-lg-3 col-md-4 col-sm-4 col-xs-12" id="minimo">
         <label for="minVol">Volume Mínimo</label>
-        <input type=number class="form-control" id="minVol" placeholder="123">
+        <input type=number class="form-control" id="minVol" name="minVol" placeholder="123">
       </div>
         <div class="form-group col-lg-3 col-md-4 col-sm-4 col-xs-12">
         <label for="maxVol">Volume Máximo</label>
-        <input type=number class="form-control" id="maxVol" placeholder="123">
+        <input type=number class="form-control" id="maxVol" name="maxVol" placeholder="123">
       </div>
     </div>
     <div class="form-row">
       <div class="form-group col-md-3">
           <label for="supplier">Fornecedor:</label>
-          <select id="supplier" class="form-control">
+          <select id="supplier" name="supplier" class="form-control">
             <option selected>Alcoa</option>
             <option>CBA</option>
             <option>RIO TINTO</option>
@@ -84,7 +84,7 @@
       </div>
        <div class="form-group col-md-3">
           <label for="allocationCtr">Contrato de compra:</label>
-          <select id="allocationCtr" class="form-control">
+          <select id="allocationCtr" name="allocationCtr" class="form-control">
             <option selected>ALP-3-00123-P</option>
             <option>...</option>
           </select>

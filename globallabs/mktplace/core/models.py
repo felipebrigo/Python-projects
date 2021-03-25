@@ -28,8 +28,6 @@ class Contract(models.Model):
     originSupplier = models.TextField(null=False, blank=False)
     allocationCtr = models.CharField(max_length=16, null=False, blank=False)
 
-    class Meta:
-        db_table = 'contract'
 
     def __str__(self):
         return self.contractNumber

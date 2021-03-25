@@ -84,8 +84,11 @@ def list_contract(request):
     return render(request, 'contracts/contracts.html', {'allcontracts': allcontracts})
 
 
-@login_required(login_url='login/')
+#@login_required(login_url='login/')
 def create_contracts(request):
+    '''form = ContractForm(request.POST or None)
+    if form.is_valid():'''
+
     if request.POST or None:
         contractNumber = request.POST.get('contractNumber')
         counterParty = request.POST.get('counterParty')
@@ -114,6 +117,7 @@ def create_contracts(request):
                                 )
 
         return redirect('list_contract')
+    return render(request, 'contracts/contracts-form.html')
 
 
 @login_required(login_url='login/')
