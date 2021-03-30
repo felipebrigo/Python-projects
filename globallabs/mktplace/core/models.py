@@ -21,11 +21,11 @@ class Contract(models.Model):
     counterParty = models.CharField(max_length=50, null=False, blank=False)
     product = models.CharField(max_length=50, null=False, blank=False)
     alloy = models.TextField()
-    shape = models.CharField(max_length=10)
+    shape = models.CharField(max_length=50)
     isRange = models.BooleanField(default=False, null=False, blank=False)
     minVol = models.IntegerField()
     maxVol = models.IntegerField()
-    originSupplier = models.TextField(null=False, blank=False)
+    originSupplier = models.CharField(max_length=50)
     allocationCtr = models.CharField(max_length=16, null=False, blank=False)
 
 

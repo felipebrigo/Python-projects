@@ -7,6 +7,7 @@ from django.views.generic import TemplateView, CreateView
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
+from django.http import HttpResponse
 from django.views.generic.list import ListView
 from django.views.generic.edit import UpdateView, DeleteView
 
@@ -88,9 +89,11 @@ def list_contract(request):
 def create_contracts(request):
     allproducts = Product.objects.all()
     form = ContractForm(request.POST or None)
+    print (form)
     if form.is_valid():
         form.save()
         return redirect('list_contract')
+
     return render(request, 'contracts/contracts-form.html', {'form': form, 'allproducts': allproducts})
 
 '''

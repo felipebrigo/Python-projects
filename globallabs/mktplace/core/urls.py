@@ -1,4 +1,6 @@
-from django.urls import path
+from django.urls import path, include
+import debug_toolbar
+from django.conf import settings
 from .views import list_products, create_products, update_products, delete_products, login_user, IndexTemplateView,submit_login, logout_user, create_contracts, delete_contracts, update_contracts, list_contract
 from django.views.generic import RedirectView
 
@@ -19,6 +21,7 @@ urlpatterns = [
     path('deletecontract/<int:id>/', delete_contracts, name='delete_contracts'),
     path('contractlist/', list_contract, name='list_contract'),
 
+    path('__debug__/', include(debug_toolbar.urls)),
 ]
 
 '''

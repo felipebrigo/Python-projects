@@ -79,25 +79,22 @@
                             <input type="number" {% render_field form.maxVol class+="form-control" id+="maxVol" name+="maxVol" placeholder+="1234" %}
                         </div>
 
-                        <div class="form-row">
-                            <div class="form-group col-md-3">
-                                <label for="supplier">Fornecedor:</label>
-                                <select {% render_field form.supplier class+="form-control" id+="supplier" name="supplier"%}>
-                                    <option selected>Alcoa</option>
-                                    <option>CBA</option>
-                                    <option>RIO TINTO</option>
-                                    <option>PRESSMETAL</option>
-                                </select>
-                            </div>
+                        <div class="input-group-prepend">
+                            <label class="input-group-text" for="originSupplier">Fornecedor:</label>
+                            <select {% render_field form.originSupplier class+="form-control" id+="originSupplier" name="originSupplier" %}>
+                                <option value="ALCOA" selected>ALCOA</option>
+                                <option value="CBA">CBA</option>
+                                <option value="RIO TINTO">RIO TINTO</option>
+                                <option value="PRESSMETAL">PRESSMETAL</option>
+                            </select>
                         </div>
-                        <div class="form-row">
-                            <div class="form-group col-md-3">
-                                <label for="allocationCtr">Contrato de compra:</label>
-                                <select {% render_field form.allocationCtr class+="form-control" id+="allocationCtr" name="allocationCtr"%}>
-                                    <option selected>ALP-3-00123-P</option>
-                                    <option>...</option>
-                                </select>
-                            </div>
+
+                        <div class="input-group-prepend">
+                            <label class="input-group-text" for="allocationCtr">Contrato de compra:</label>
+                            <select {% render_field form.allocationCtr class+="form-control" id+="allocationCtr" name="allocationCtr"%}>
+                                <option VALUE="1" selected>ALP-3-00123-P</option>
+                                <option VALUE="2">...</option>
+                            </select>
                         </div>
                         <button type="submit" class="btn btn-primary">Enviar</button>
                     </form>
