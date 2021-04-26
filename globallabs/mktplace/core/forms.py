@@ -6,7 +6,12 @@ class ProductForm(forms.ModelForm):
     class Meta:
         # FIELDS WHICH WILL BE INTO FORM CREATED
         model = Product
-        fields = ['code', 'element', 'alloy', 'shape', 'stock', 'price']
+        fields = ['code',
+                  'element',
+                  'alloy',
+                  'shape',
+                  'stock',
+                  'price']
 
 
 class ContractForm(forms.ModelForm):
@@ -15,15 +20,12 @@ class ContractForm(forms.ModelForm):
         model = Contract
         fields = [
             'contractNumber',
-            'isPurchase',
             'counterParty',
+            'contractCounterParty',
             'product',
             'alloy',
-            'shape',
-            'isRange',
             'minVol',
             'maxVol',
-            'originSupplier',
-            'allocationCtr'
+            'lastChangeUser'
             ]
 

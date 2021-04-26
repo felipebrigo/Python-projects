@@ -17,17 +17,13 @@ class Product(models.Model):
 
 class Contract(models.Model):
     contractNumber = models.CharField(max_length=16, null=False, blank=False)
-    isPurchase = models.BooleanField(default=False, null=False, blank=False)
-    counterParty = models.CharField(max_length=50, null=False, blank=False)
+    counterParty = models.CharField(max_length=100, null=False, blank=False)
+    contractCounterParty = models.CharField(max_length=50)
     product = models.CharField(max_length=50, null=False, blank=False)
     alloy = models.TextField()
-    shape = models.CharField(max_length=50)
-    isRange = models.BooleanField(default=False, null=False, blank=False)
     minVol = models.IntegerField()
     maxVol = models.IntegerField()
-    originSupplier = models.CharField(max_length=50)
-    allocationCtr = models.CharField(max_length=16, null=False, blank=False)
-
+    lastChangeUser = models.TextField()
 
     def __str__(self):
         return self.contractNumber

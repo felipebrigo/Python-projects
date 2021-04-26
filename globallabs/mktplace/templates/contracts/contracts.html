@@ -12,50 +12,37 @@
       <div class="card">
         <div class="card-body">
           <h5 class="card-title">Lista de Contratos</h5>
-
           {% if allcontracts|length > 0 %}
-            <p class="card-text">
-              Aqui está a lista de <code>Contratos</code> cadastrados.
-            </p>
-
-            <table class="table">
-              <thead class="thead-dark">
-              <tr>
-                <th>Numero de Contrato</th>
-                <th>Contra-Parte</th>
-                <th>Produto</th>
-                <th>Volume Minimo</th>
-                <th>Fornecedor</th>
-              </tr>
-              </thead>
-
-              <tbody>
-              {% for contract in allcontracts %}
-                <tr>
-                  <td>{{ contract.contractNumber }}</td>
-                  <td>{{ contract.counterParty }}</td>
-                  <td>{{ contract.product }}</td>
-                  <td>{{ contract.minVol }}</td>
-                  <td>{{ contract.originSupplier }}</td>
-                  <td>
-                    <a href="{% url 'update_contracts' contract.id %}"
-                       class="btn btn-info">
-                      Atualizar
-                    </a>
-                    <a href="{% url 'delete_contracts' contract.id %}"
-                      class="btn btn-outline-danger">
-                        Excluir
-                    </a>
-                  </td>
-                </tr>
-              {% endfor %}
-              </tbody>
-            </table>
-        {% else %}
+          <p class="card-text">
+            Aqui está a lista de <code>Contratos</code> cadastrados.
+          </p>
+          <tbody>
+          {% for contract in allcontracts %}
+          <tr>
+            <td>{{ contract.contractNumber }}</td>
+            <td>{{ contract.counterParty }}</td>
+            <td>{{ contract.product }}</td>
+            <td>{{ contract.minVol }}</td>
+            <td>{{ contract.originSupplier }}</td>
+            <td>
+              <a href="{% url 'update_contracts' contract.id %}"
+                 class="btn btn-info">
+                Atualizar
+              </a>
+              <a href="{% url 'delete_contracts' contract.id %}"
+                 class="btn btn-outline-danger">
+                Excluir
+              </a>
+            </td>
+          </tr>
+          {% endfor %}
+          </tbody>
+          </table>
+          {% else %}
           <div class="text-center mt-5 mb-5 jumbotron">
             <h5>Nenhum <code>Contrato</code> cadastrado ainda.</h5>
           </div>
-        {% endif %}
+          {% endif %}
           <div class="text-right">
             <a href="{% url 'create_contracts' %}" class="btn btn-primary">
               Cadastrar Contrato
@@ -67,4 +54,117 @@
   </div>
 </div>
 
-{%endblock%}
+{% endblock %}
+
+<!--
+<div class="container my-4">
+
+  <hr class="mt-5">
+
+  <div class="table-responsive">
+
+    {% if allcontracts|length > 0 %}
+    <p class="card-text">
+      Aqui está a lista de <code>Contratos</code> cadastrados.
+    </p>
+
+    <table class="table">
+      <thead class="thead-dark">
+      <tr>
+        <th scope="col">Numero de Contrato</th>
+        <th scope="col">Contra-Parte</th>
+        <th scope="col">Produto</th>
+        <th scope="col">Volume Minimo</th>
+        <th scope="col">Volume Máximo</th>
+        <th scope="col">Ação</th>
+      </tr>
+      </thead>
+
+      {% for contract in allcontracts %}
+      <tbody>
+      <tr>
+      <!-<tr class="accordion-toggle collapsed" id="accordion1" data-toggle="collapse" data-parent="#accordion1" href="#collapseOne"> ->
+        <!-<td class="expand-button">+/-</td>->
+
+        <td>{{ contract.contractNumber }}</td>
+        <td>{{ contract.counterParty }}</td>
+        <td>{{ contract.product }}</td>
+        <td>{{ contract.minVol }}</td>
+        <td>{{ contract.maxVol }}</td>
+        <td>
+          <a href="{% url 'update_contracts' contract.id %}"
+             class="btn btn-info">
+            Atualizar
+          </a>
+          <a href="{% url 'delete_contracts' contract.id %}"
+             class="btn btn-outline-danger">
+            Excluir
+          </a>
+        </td>
+      </tr>
+      {% endfor %}
+{%endif%}
+      <tr class="hide-table-padding">
+        <td></td>
+        <td colspan="3">
+          <div id="collapseOne" class="collapse in p-3">
+            <div class="row">
+              <div class="col-2">label</div>
+              <div class="col-6">value 1</div>
+            </div>
+            <div class="row">
+              <div class="col-2">label</div>
+              <div class="col-6">value 2</div>
+            </div>
+            <div class="row">
+              <div class="col-2">label</div>
+              <div class="col-6">value 3</div>
+            </div>
+            <div class="row">
+              <div class="col-2">label</div>
+              <div class="col-6">value 4</div>
+            </div>
+          </div>
+        </td>
+      </tr>
+      <tr class="accordion-toggle collapsed" id="accordion2" data-toggle="collapse" data-parent="#accordion2" href="#collapseTwo">
+        <td class="expand-button">+/-</td>
+        <td>Cell</td>
+        <td>Cell</td>
+        <td>Cell</td>
+
+      </tr>
+      <tr class="hide-table-padding">
+        <td></td>
+        <td colspan="4">
+          <div id="collapseTwo" class="collapse in p-3">
+            <div class="row">
+              <div class="col-2">label</div>
+              <div class="col-6">value</div>
+            </div>
+            <div class="row">
+              <div class="col-2">label</div>
+              <div class="col-6">value</div>
+            </div>
+            <div class="row">
+              <div class="col-2">label</div>
+              <div class="col-6">value</div>
+            </div>
+            <div class="row">
+              <div class="col-2">label</div>
+              <div class="col-6">value</div>
+            </div>
+          </div></td>
+      </tr>
+
+
+
+      </tbody>
+    </table>
+
+  </div>
+  <button>Cadastrar B/L nos contratos</button>
+  <button>Alocar Container</button>
+</div>
+
+-->
