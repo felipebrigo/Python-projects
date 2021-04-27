@@ -19,11 +19,11 @@ class Contract(models.Model):
     contractNumber = models.CharField(max_length=16, null=False, blank=False)
     counterParty = models.CharField(max_length=100, null=False, blank=False)
     contractCounterParty = models.CharField(max_length=50)
-    product = models.CharField(max_length=50, null=False, blank=False)
-    alloy = models.TextField()
+    product = models.CharField(max_length=100)
+    alloy = models.CharField(max_length=100)
     minVol = models.IntegerField()
     maxVol = models.IntegerField()
-    lastChangeUser = models.TextField()
+    #lastChangeUser = models.TextField()
 
     def __str__(self):
         return self.contractNumber

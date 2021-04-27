@@ -87,11 +87,12 @@ def list_contract(request):
     return render(request, 'contracts/contracts.html', {'allcontracts': allcontracts})
 
 
-#@login_required(login_url='login/')
+@login_required(login_url='login/')
 def create_contracts(request):
     allproducts = Product.objects.all()
     user = request.user
     form = ContractForm(request.POST or None)
+    form.lastChangeUser = request.POST.get('lastChangeUser')
     if form.is_valid():
         form.save()
         return redirect('list_contract')
