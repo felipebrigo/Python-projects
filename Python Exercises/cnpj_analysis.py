@@ -34,7 +34,7 @@ def openfile(programnumber):
 def file_type():
     global textsliced
     #companies=["AUTO","MECANICA","SUSPEN","VEICU","BLUEQUEST","PECAS","PNEU", "RECAPA"]
-    companies=["FIO", "CABOS", "CONDUTOR"]
+    companies=["ALUMINIO", "SUCATA", "EXTRUS", "ALUMÍNIO", "COBRE", "BLUEQUEST"]
     state=["AC", "AL", "AP", "AM", "BA", "CE", "DF", "ES", "GO", "MA", "MT", "MS", "MG", "PA", "PB", "PR", "PE", "PI", "RJ", "RN", "RS", "RO", "RR", "SC", "SP", "SE", "TO"]
     for item in range(0,len(textsliced)):
         if textsliced[item][682:684] in state:
